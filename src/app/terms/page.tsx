@@ -1,8 +1,9 @@
 import Navbar from '@/components/Navbar';
-import Link from 'next/link';
+import ClientHtmlRenderer from '@/components/ClientHtmlRenderer';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'Terms of Service - TitbeatTech Solutions',
+export const metadata: Metadata = {
+  title: 'Terms of Service | TitbeatTech Solutions',
   description: 'Terms of Service for TitbeatTechsolutions.app',
 };
 
@@ -107,7 +108,7 @@ Calibri;color:#595959;mso-themecolor:text1;mso-themetint:166;">THE SERVICES ARE 
       <Navbar />
       <main style={{ minHeight: '100vh', paddingTop: '100px', backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem' }}>
-          <div dangerouslySetInnerHTML={{ __html: termsHtml }} />
+          <ClientHtmlRenderer html={termsHtml} />
           <div style={{ marginTop: '3rem', padding: '1.5rem', backgroundColor: '#fff3cd', color: '#856404', borderRadius: '8px', border: '1px solid #ffeeba' }}>
             <strong>Note from developer:</strong> The rest of the terms content was truncated because the provided text was too long for the chat interface limits. Please provide the remaining text (from section 21 onwards) in a file or the next message so I can complete it.
           </div>

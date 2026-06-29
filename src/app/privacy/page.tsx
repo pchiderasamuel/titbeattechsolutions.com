@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
+import ClientHtmlRenderer from '@/components/ClientHtmlRenderer';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | TitbeatTechsolutions',
@@ -74,7 +75,7 @@ word-break: break-word !important;
         <Link href="/" style={{ color: '#0055FF', textDecoration: 'underline', marginBottom: '30px', display: 'inline-block' }}>
           &larr; Back to Home
         </Link>
-        <div dangerouslySetInnerHTML={{ __html: policyHtml }} />
+        <ClientHtmlRenderer html={policyHtml} />
       </main>
     </>
   );
