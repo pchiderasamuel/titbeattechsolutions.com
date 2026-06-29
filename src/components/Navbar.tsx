@@ -34,12 +34,12 @@ export default function Navbar({ onSignup, onLogin }: { onSignup: () => void; on
             </li>
           ))}
           <li className={styles.mobileCta}>
-            <button className={styles.btnOutline} onClick={() => { onLogin(); setMenuOpen(false); }}>Log In</button>
+            <a href={process.env.NEXT_PUBLIC_APP_URL || 'https://app.titbeattechsolutions.app'} className={styles.btnOutline} onClick={() => setMenuOpen(false)}>Log In</a>
             <button className={styles.btnPrimary} onClick={() => { onSignup(); setMenuOpen(false); }}>Get Started</button>
           </li>
         </ul>
         <div className={styles.desktopCta}>
-          <button className={styles.btnOutline} onClick={onLogin}>Log In</button>
+          <a href={process.env.NEXT_PUBLIC_APP_URL || 'https://app.titbeattechsolutions.app'} className={styles.btnOutline}>Log In</a>
           <button className={styles.btnPrimary} onClick={onSignup}>Get Started</button>
         </div>
       </div>

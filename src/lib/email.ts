@@ -77,7 +77,7 @@ export async function sendWelcomeEmail(params: {
              style="display:inline-block;background:#2563EB;color:#fff;
                     text-decoration:none;padding:14px 28px;border-radius:10px;
                     font-weight:700;font-size:15px;">
-            Log In &amp; Set New Password →
+            Access App &amp; Set New Password →
           </a>
 
           <hr style="border:none;border-top:1px solid #E2E8F0;margin:28px 0;" />

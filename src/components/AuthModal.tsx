@@ -5,7 +5,6 @@ import styles from './CheckoutModal.module.css';
 interface Props { mode: 'login' | 'signup' | null; onClose: () => void; onSwitchToCheckout: (plan: string) => void; }
 
 export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) {
-  const [tab, setTab] = useState<'login' | 'signup'>(mode || 'login');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -20,27 +19,7 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
   const [address,   setAddress]   = useState('');
   const [selectedPlan, setSelectedPlan] = useState('growth');
 
-  if (!mode) return null;
-
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    setError(''); setLoading(true);
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: fd.get('email'), password: fd.get('password') }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        window.location.href = process.env.NEXT_PUBLIC_APP_URL || 'https://app.titbeattechsolutions.app';
-      } else {
-        setError(data.error || 'Login failed');
-      }
-    } catch { setError('Network error. Please try again.'); }
-    finally { setLoading(false); }
-  };
+  if (!mode || mode === 'login') return null;
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,24 +58,7 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
         <div className={styles.form}>
           <button className={styles.close} onClick={onClose}>×</button>
           <h3 style={{ marginBottom: '1.5rem' }}>Welcome to TitbeatTech</h3>
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
-            {(['login', 'signup'] as const).map(t => (
-              <button key={t} onClick={() => { setTab(t); setError(''); }}
-                style={{ flex: 1, padding: '0.6rem', borderRadius: 8, border: 'none',
-                  background: tab === t ? 'linear-gradient(135deg,#4472C4,#2563EB)' : 'var(--card)',
-                  color: tab === t ? '#fff' : 'var(--text)', fontWeight: 700, cursor: 'pointer' }}>
-                {t === 'login' ? 'Log In' : 'Sign Up'}
-              </button>
-            ))}
-          </div>
-          {tab === 'login' ? (
-            <form key="login-form" onSubmit={handleLogin}>
-              <div className={styles.field}><label>Email</label><input name="email" type="email" placeholder="admin@yourschool.edu.ng" required /></div>
-              <div className={styles.field}><label>Password</label><input name="password" type="password" placeholder="••••••••" required /></div>
-              {error && <p className={styles.error}>{error}</p>}
-              <button type="submit" className={styles.submit} disabled={loading}>{loading ? 'Logging in…' : 'Log In'}</button>
-            </form>
-          ) : (
+          <p style={{ color: 'var(--muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Start your free 14-day trial. No credit card required.</p>
             <form key="signup-form" onSubmit={handleSignup}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className={styles.field}>
@@ -149,7 +111,6 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
                 {loading ? 'Processing…' : 'Start Free Trial'}
               </button>
             </form>
-          )}
         </div>
       </div>
     </div>
