@@ -270,8 +270,9 @@ export default function HomePage() {
       <footer className={styles.footer}>
         <div className={styles.footerMain}>
           <div className={styles.footerBrand}>
-            <a href="#" className={styles.footerLogo}>
-              <img src="/tbt-logo.png" alt="TitbeatTech Solutions" style={{ height: '40px', width: 'auto' }} />
+            <a href="#" className={styles.footerLogo} style={{ textDecoration: 'none', color: '#fff' }}>
+              <img src="/tbt-logo.png" alt="TitbeatTech Solutions Logo" style={{ height: '40px', width: 'auto' }} />
+              <span style={{ fontSize: '1.2rem', fontWeight: 900, letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>TITBEATTECH SOLUTIONS</span>
             </a>
             <p>Empowering Nigerian K-12 schools with a modern, cloud-based platform to streamline operations, fees, and communication.</p>
             <div className={styles.socials}>

@@ -17,8 +17,9 @@ export default function Navbar({ onSignup, onLogin }: { onSignup: () => void; on
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
-        <a href="#" className={styles.logo}>
-          <img src="/tbt-logo.png" alt="TitbeatTech Solutions" style={{ height: '36px', width: 'auto' }} />
+        <a href="#" className={styles.logo} style={{ textDecoration: 'none' }}>
+          <img src="/tbt-logo.png" alt="TitbeatTech Solutions Logo" style={{ height: '36px', width: 'auto' }} />
+          <span style={{ fontSize: '1.1rem', color: '#4472C4', fontWeight: 900, letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>TITBEATTECH SOLUTIONS</span>
         </a>
         <button className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
           aria-label="Toggle menu" onClick={() => setMenuOpen(m => !m)}>
