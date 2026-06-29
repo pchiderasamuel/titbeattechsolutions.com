@@ -1,0 +1,16 @@
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:2rem}
+.card{max-width:500px;width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:3rem 2.5rem;text-align:center;animation:slideUp 0.4s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.ring{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#16A34A,#4ADE80);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;box-shadow:0 0 0 12px rgba(22,163,74,0.12);font-size:2.2rem;color:#fff;animation:popIn 0.5s 0.2s cubic-bezier(0.175,0.885,0.32,1.275) both}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+.cardH1{font-size:1.8rem;font-weight:900;color:var(--white);margin-bottom:0.75rem}
+.sub{font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+.infoBox{background:#F0F7FF;border:1px solid #D4E5FF;border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:2rem;text-align:left}
+.infoBox p{font-size:0.9rem;color:#334155;margin:0;line-height:1.7}
+.infoBox p+p{margin-top:0.75rem}
+.infoBox a{color:#2563EB}
+.btn{display:inline-block;background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#fff;text-decoration:none;padding:0.9rem 2rem;border-radius:10px;font-weight:700;font-size:1rem;margin-bottom:1.5rem;transition:transform 0.2s,box-shadow 0.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,0.35)}
+.card>p{font-size:0.82rem;color:var(--muted)}
+.card>p a{color:var(--muted)}
+.card>p a:hover{color:var(--white)}
