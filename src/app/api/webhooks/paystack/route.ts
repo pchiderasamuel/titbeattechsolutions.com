@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { verifyWebhookSignature } from '@/lib/paystack';
 import {
   isEventProcessed,
@@ -71,21 +71,17 @@ export async function POST(req: NextRequest) {
   // ── 5. Respond to Paystack immediately (< 5 s requirement) ──────
   // We return 200 here. If processing fails, Paystack will retry.
   // We run processEvent() as a fire-and-forget after responding.
-  // In Next.js on Vercel, the serverless function stays alive until
-  // the response stream closes AND all awaited work completes —
-  // so we await it AFTER constructing the response.
-
-  // Start processing (async, non-blocking from response perspective)
-  const processingPromise = processEvent(eventType, event.data)
-    .then(() => markEventProcessed(eventId, eventType))
-    .catch(err => {
+  // In Next.js, we use `after()` from 'next/server' to ensure the runtime
+  // stays alive until the work completes, without blocking the HTTP response.
+  
+  after(async () => {
+    try {
+      await processEvent(eventType, event.data);
+      await markEventProcessed(eventId, eventType);
+    } catch (err) {
       console.error(`[webhook] Error processing ${eventId} (${eventType}):`, err);
-    });
-
-  // Wait for processing to complete so Vercel doesn't kill the function early.
-  // The 200 response is sent immediately in the HTTP sense but the function
-  // contract on Vercel keeps the runtime alive until all awaited Promises resolve.
-  await processingPromise;
+    }
+  });
 
   return NextResponse.json({ received: true });
 }

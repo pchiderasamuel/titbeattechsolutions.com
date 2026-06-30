@@ -20,4 +20,8 @@
 .submit{width:100%;padding:0.85rem;background:linear-gradient(135deg,#4472C4,#2563EB);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:1rem;transition:all 0.2s}
 .submit:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 20px rgba(68,114,196,0.4)}
 .submit:disabled{opacity:0.7;cursor:not-allowed}
-@media(max-width:640px){.modal{grid-template-columns:1fr}.summary{display:none}}
+@media(max-width:640px){
+  .modal{grid-template-columns:1fr}
+  .summary{padding: 1.25rem; border-bottom: 1px solid var(--border)}
+  .row2{grid-template-columns:1fr}
+}

@@ -35,6 +35,10 @@
 .marqueeTrack span{flex-shrink:0}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
+.promoBannerSection{padding:2rem 2rem 0;max-width:1200px;margin:0 auto;width:100%}
+.promoBannerContainer{width:100%;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);line-height:0;border:1px solid var(--border)}
+.promoBannerImage{width:100%;height:auto;display:block;object-fit:cover;transition:transform 0.3s}
+.promoBannerImage:hover{transform:scale(1.02)}
 .section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
 .sectionHead{text-align:center;margin-bottom:3rem}
 .sectionLabel{font-size:0.8rem;text-transform:uppercase;letter-spacing:3px;color:#4472C4;font-weight:700;margin-bottom:0.5rem}
@@ -156,6 +160,8 @@
 @media(max-width:600px){
   .footerMain{grid-template-columns:1fr}
   .footerBottom{flex-direction:column;gap:1rem;text-align:center}
-  .ctaBtns{flex-direction:column;align-items:center}
-  .heroBtns{flex-direction:column}
+  .ctaBtns{flex-direction:column;align-items:stretch; gap: 0.75rem;}
+  .ctaBtns button, .ctaBtns a { width: 100%; text-align: center; }
+  .heroBtns{flex-direction:column; align-items: stretch; gap: 0.75rem;}
+  .heroBtns button, .heroBtns a { width: 100%; text-align: center; justify-content: center; }
 }

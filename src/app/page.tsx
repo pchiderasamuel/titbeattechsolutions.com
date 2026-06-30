@@ -59,6 +59,13 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* PROMO BANNER */}
+      <section className={styles.promoBannerSection}>
+        <div className={styles.promoBannerContainer}>
+          <img src="/promo-banner.png" alt="Cloud SaaS App for Modern School Administration" className={styles.promoBannerImage} />
+        </div>
+      </section>
+
       {/* FEATURES */}
       <section id="features" className={styles.section}>
         <div className={styles.sectionHead}>
@@ -285,7 +292,7 @@ export default function HomePage() {
           </div>
           <div className={styles.footerCol}><h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#how-it-works">How it Works</a></div>
           <div className={styles.footerCol}><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact Sales</a><a href="#">Support</a></div>
-          <div className={styles.footerCol}><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="#">NDPR Compliance</a></div>
+          <div className={styles.footerCol}><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/ndpr-compliance">NDPR Compliance</a></div>
         </div>
         <div className={styles.footerBottom}>
           <p>© 2026 TitbeatTechsolutions.app — All rights reserved.</p>
