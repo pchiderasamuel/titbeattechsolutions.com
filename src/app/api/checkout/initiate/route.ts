@@ -7,7 +7,7 @@ const checkoutSchema = z.object({
   schoolName:  z.string().min(3, 'School name must be at least 3 characters'),
   adminName:   z.string().min(2, 'Admin name must be at least 2 characters'),
   adminEmail:  z.string().email('Invalid email address'),
-  plan:        z.enum(['starter', 'growth', 'enterprise']),
+  plan:        z.enum(['micro', 'starter', 'growth', 'enterprise']),
   country:     z.string().optional(),
   state:       z.string().optional(),
   lga:         z.string().optional(),

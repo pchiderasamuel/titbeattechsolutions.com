@@ -3,9 +3,10 @@ import { useState } from 'react';
 import styles from './CheckoutModal.module.css';
 
 const PLANS: Record<string, { name: string; students: string; basePrice: number; plus?: boolean }> = {
-  starter:    { name: 'Starter',    students: 'Up to 300 students',   basePrice: 30000 },
-  growth:     { name: 'Growth',     students: 'Up to 1,000 students', basePrice: 50000 },
-  enterprise: { name: 'Enterprise', students: 'Unlimited students',   basePrice: 90000, plus: true },
+  micro:      { name: 'Micro',      students: 'Up to 200 students',   basePrice: 18000 },
+  starter:    { name: 'Starter',    students: 'Up to 500 students',   basePrice: 45000 },
+  growth:     { name: 'Growth',     students: 'Up to 1,000 students', basePrice: 90000 },
+  enterprise: { name: 'Enterprise', students: '1,001+ students',      basePrice: 150000, plus: true },
 };
 
 interface Props { plan: string | null; isAnnual?: boolean; onClose: () => void; }
@@ -25,7 +26,7 @@ export default function CheckoutModal({ plan, isAnnual, onClose }: Props) {
 
   if (!plan) return null;
   const p = PLANS[plan];
-  const finalPrice = isAnnual ? p.basePrice * 3 : p.basePrice;
+  const finalPrice = isAnnual ? p.basePrice * 3 * 0.9 : p.basePrice;
   const priceStr = `₦${finalPrice.toLocaleString()}${p.plus ? '+' : ''}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -74,7 +75,7 @@ export default function CheckoutModal({ plan, isAnnual, onClose }: Props) {
         <div className={styles.form}>
           <button className={styles.close} onClick={onClose}>×</button>
           <h3>Complete Your Subscription</h3>
-          <p>14-day free trial — no charge today.</p>
+          <p>7-day free trial — no charge today. T&C applies.</p>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem' }}>
             {(['paystack', 'bank'] as const).map(t => (
               <button key={t} type="button" onClick={() => { setPaymentMethod(t); setError(''); }}

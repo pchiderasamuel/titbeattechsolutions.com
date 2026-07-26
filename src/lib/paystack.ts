@@ -10,6 +10,7 @@ const SECRET_KEY    = process.env.PAYSTACK_SECRET_KEY as string;
 
 /** Plan codes pre-created in your Paystack dashboard. */
 export const PLAN_CODES: Record<string, string> = {
+  micro:      process.env.PAYSTACK_PLAN_MICRO      || '',
   starter:    process.env.PAYSTACK_PLAN_STARTER    || '',
   growth:     process.env.PAYSTACK_PLAN_GROWTH     || '',
   enterprise: process.env.PAYSTACK_PLAN_ENTERPRISE || '',

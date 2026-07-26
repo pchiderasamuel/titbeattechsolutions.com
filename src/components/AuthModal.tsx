@@ -58,7 +58,7 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
         <div className={styles.form}>
           <button className={styles.close} onClick={onClose}>×</button>
           <h3 style={{ marginBottom: '1.5rem' }}>Welcome to TitbeatTech</h3>
-          <p style={{ color: 'var(--muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Start your free 14-day trial. No credit card required.</p>
+          <p style={{ color: 'var(--muted)', fontSize: '0.9rem', marginBottom: '1.5rem' }}>Start your free 7-day trial. No credit card required. T&C applies.</p>
             <form key="signup-form" onSubmit={handleSignup}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className={styles.field}>
@@ -101,9 +101,10 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
               <div className={styles.field}>
                 <label>Select Plan</label>
                 <select value={selectedPlan} onChange={e => setSelectedPlan(e.target.value)} required style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.65rem 0.9rem', color: 'var(--text)', fontSize: '0.95rem', outline: 'none' }}>
-                  <option value="starter">Starter Plan (Up to 300 students)</option>
+                  <option value="micro">Micro Plan (Up to 200 students)</option>
+                  <option value="starter">Starter Plan (Up to 500 students)</option>
                   <option value="growth">Growth Plan (Up to 1,000 students)</option>
-                  <option value="enterprise">Enterprise Plan (Unlimited)</option>
+                  <option value="enterprise">Enterprise Plan (1,001+ students)</option>
                 </select>
               </div>
               {error && <p className={styles.error}>{error}</p>}

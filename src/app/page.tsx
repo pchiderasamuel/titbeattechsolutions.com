@@ -29,7 +29,7 @@ export default function HomePage() {
               <a href="#how-it-works" className={styles.btnOutline}>See How It Works</a>
             </div>
             <div className={styles.heroStats}>
-              {[['14','Day Free Trial'],['99.9%','Uptime SLA'],['K-12','Schools'],['NGN','Local Billing']].map(([v,l]) => (
+              {[['7','Day Free Trial'],['99.9%','Uptime SLA'],['K-12','Schools'],['NGN','Local Billing']].map(([v,l]) => (
                 <div key={l} className={styles.stat}><div className={styles.val}>{v}</div><div className={styles.lbl}>{l}</div></div>
               ))}
             </div>
@@ -117,30 +117,45 @@ export default function HomePage() {
         <div className={styles.sectionHead}>
           <p className={styles.sectionLabel}>Pricing</p>
           <h2 className={styles.sectionTitle}>Simple, Transparent Plans</h2>
-          <p className={styles.sectionSub}>Termly plans aligned with Nigeria&apos;s school calendar. No hidden fees.</p>
-          <p className={styles.sectionSub}>💡 All prices in Nigerian Naira (₦) | No credit card required for free trial.</p>
+          <p className={styles.sectionSub}>Billed per term — aligned to your school&apos;s fee collection cycle.</p>
+          <p className={styles.sectionSub}>💡 All prices in Nigerian Naira (₦) | No credit card required for free trial. T&C applies.</p>
           <div className={styles.toggleWrap}>
             <span className={!isAnnual ? styles.activeToggle : ''}>Termly</span>
             <button className={`${styles.toggleBtn} ${isAnnual ? styles.toggled : ''}`} onClick={() => setIsAnnual(!isAnnual)}>
               <div className={styles.toggleKnob} />
             </button>
-            <span className={isAnnual ? styles.activeToggle : ''}>Annually (3 Terms)</span>
+            <span className={isAnnual ? styles.activeToggle : ''}>Pay annually (3 terms upfront) and save 10%</span>
           </div>
         </div>
         <div className={styles.pricingGrid}>
           {[
-            { id:'starter', name:'Starter', desc:'< 300 students', basePrice:30000, features:['Up to 300 students','Admin + 2 staff accounts','Fee management','SMS notifications','Email support'], popular:false },
-            { id:'growth',  name:'Growth',  desc:'300–1,000 students', basePrice:50000, features:['Up to 1,000 students','Unlimited staff accounts','Full feature access','Analytics dashboard','Priority support'], popular:true },
-            { id:'enterprise', name:'Enterprise', desc:'Large / Multi-branch', basePrice:90000, features:['Unlimited students','Multi-branch support','API integrations','Dedicated account manager','SLA guarantee'], popular:false, plus: true },
+            { id:'micro', name:'Micro', desc:'0–200 students', basePrice:18000, listPrice:30000, features:['Up to 200 students','Admin + 2 staff accounts','Fee management','Capped SMS/email credits','Basic timetable','Email support'], popular:false },
+            { id:'starter', name:'Starter', desc:'201–500 students', basePrice:45000, listPrice:75000, features:['Up to 500 students','Admin + 5 staff accounts','Fee management','Capped SMS/email credits','Full timetable','Email support'], popular:false },
+            { id:'growth',  name:'Growth',  desc:'501–1,000 students', basePrice:90000, listPrice:150000, features:['Up to 1,000 students','Unlimited staff accounts','Fee management','Higher credit pool','Full timetable','Analytics dashboard','Priority support'], popular:true },
+            { id:'enterprise', name:'Enterprise', desc:'1,001+ students', basePrice:150000, listPrice:150000, features:['Unlimited students','Unlimited staff accounts','Custom credit pool','Multi-branch support','API integrations','Dedicated account manager','Dedicated SLA support'], popular:false, plus: true },
           ].map(plan => {
-            const currentPrice = isAnnual ? plan.basePrice * 3 : plan.basePrice;
+            const currentPrice = isAnnual ? plan.basePrice * 3 * 0.9 : plan.basePrice;
+            const listPriceCurrent = isAnnual ? plan.listPrice * 3 * 0.9 : plan.listPrice;
             const priceStr = currentPrice.toLocaleString();
+            const listStr = listPriceCurrent.toLocaleString();
             return (
             <div key={plan.id} className={`${styles.priceCard} ${plan.popular ? styles.popular : ''}`}>
               {plan.popular && <div className={styles.popularBadge}>★ MOST POPULAR</div>}
               <div className={styles.priceTier}>{plan.name}</div>
               <div className={styles.priceDesc}>{plan.desc}</div>
               <div className={styles.priceAmount}><span className={styles.currency}>₦</span>{priceStr}{plan.plus ? '+' : ''}</div>
+              {plan.id === 'enterprise' ? (
+                <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '1rem', marginTop: '-0.3rem' }}>
+                  List: ₦{listStr}{plan.plus ? ' + ₦120/student beyond 1k' : ''} (Contact us)
+                </div>
+              ) : (
+                <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '1rem', marginTop: '-0.3rem' }}>
+                  <span style={{ textDecoration: 'line-through' }}>₦{listStr}</span> list price
+                </div>
+              )}
+              <div style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600, marginBottom: '1rem', lineHeight: 1.4 }}>
+                Founding price locked for your first academic year (3 terms). Offer limited to the first 150 schools.
+              </div>
               <hr className={styles.priceDivider}/>
               <ul className={styles.priceFeatures}>
                 {plan.features.map(f => <li key={f}>{f}</li>)}
@@ -152,6 +167,10 @@ export default function HomePage() {
               </button>
             </div>
           )})}
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '3rem', fontSize: '1rem', color: 'var(--muted)' }}>
+          <p>🛡️ <strong>First-term money-back guarantee</strong> — if it&apos;s not right for your school, we refund it.</p>
+          <p style={{ marginTop: '0.5rem' }}>🎁 <strong>Refer a school, get a free term.</strong></p>
         </div>
       </section>
 
@@ -166,22 +185,23 @@ export default function HomePage() {
             <thead>
               <tr>
                 <th>Feature</th>
+                <th>Micro</th>
                 <th>Starter</th>
                 <th>Growth</th>
                 <th>Enterprise</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Student management</td><td>Up to 300</td><td>Up to 1,000</td><td>Unlimited</td></tr>
-              <tr><td>Staff accounts</td><td>Admin + 2</td><td>Unlimited</td><td>Unlimited</td></tr>
-              <tr><td>Fee management</td><td>✓</td><td>✓</td><td>✓</td></tr>
-              <tr><td>SMS/email notifications</td><td>✓</td><td>✓</td><td>✓</td></tr>
-              <tr><td>Analytics dashboard</td><td>✗</td><td>✓</td><td>✓</td></tr>
-              <tr><td>Timetable planner</td><td>Basic</td><td>Full</td><td>Full</td></tr>
-              <tr><td>Multi-branch support</td><td>✗</td><td>✗</td><td>✓</td></tr>
-              <tr><td>API integrations</td><td>✗</td><td>✗</td><td>✓</td></tr>
-              <tr><td>Dedicated account manager</td><td>✗</td><td>✗</td><td>✓</td></tr>
-              <tr><td>Support</td><td>Email</td><td>Priority</td><td>Dedicated SLA</td></tr>
+              <tr><td>Student management</td><td>Up to 200</td><td>Up to 500</td><td>Up to 1,000</td><td>Unlimited</td></tr>
+              <tr><td>Staff accounts</td><td>Admin + 2</td><td>Admin + 5</td><td>Unlimited</td><td>Unlimited</td></tr>
+              <tr><td>Fee management</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+              <tr><td>SMS/email notifications</td><td>Capped credits</td><td>Capped credits</td><td>Higher credit pool</td><td>Custom pool</td></tr>
+              <tr><td>Timetable planner</td><td>Basic</td><td>Full</td><td>Full</td><td>Full</td></tr>
+              <tr><td>Analytics dashboard</td><td>✗</td><td>✗</td><td>✓</td><td>✓</td></tr>
+              <tr><td>Multi-branch support</td><td>✗</td><td>✗</td><td>✗</td><td>✓</td></tr>
+              <tr><td>API integrations</td><td>✗</td><td>✗</td><td>✗</td><td>✓</td></tr>
+              <tr><td>Dedicated account manager</td><td>✗</td><td>✗</td><td>✗</td><td>✓</td></tr>
+              <tr><td>Support</td><td>Email</td><td>Email</td><td>Priority</td><td>Dedicated SLA</td></tr>
             </tbody>
           </table>
         </div>
@@ -254,7 +274,7 @@ export default function HomePage() {
           <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
         </div>
         <div className={styles.faqList}>
-          <FaqItem q="Do I need a credit card to start the free trial?" a="No credit card required. Sign up and get full access for 14 days free. Your data is never deleted when the trial ends — just choose a plan to continue."/>
+          <FaqItem q="Do I need a credit card to start the free trial?" a="No credit card required. Sign up and get full access for 7 days free. Your data is never deleted when the trial ends — just choose a plan to continue. T&C applies."/>
           <FaqItem q="What payment methods are supported?" a="We accept card payments (Visa, Mastercard, Verve), bank transfers and USSD payments via Paystack — the most popular payment methods for Nigerian schools."/>
           <FaqItem q="Can I switch plans later?" a="Yes. You can upgrade or downgrade your plan at any time. Upgrades take effect immediately; downgrades apply from the next billing term."/>
           <FaqItem q="Is my school's data safe?" a="Absolutely. All data is encrypted with 256-bit SSL, stored securely, and we are fully NDPR compliant. We never share your data with third parties without consent."/>
@@ -268,7 +288,7 @@ export default function HomePage() {
         <h2>Let&apos;s Build the <span className={styles.ctaGradient}>Future of Education</span></h2>
         <p>TitbeatTechsolutions.app — Empowering schools, one subscription at a time.</p>
         <div className={styles.ctaBtns}>
-          <button className={styles.btnPrimary} onClick={() => setAuthMode('signup')}>Start Free Trial — No Card Needed</button>
+          <button className={styles.btnPrimary} onClick={() => setAuthMode('signup')}>Start Free Trial — No Card Needed (T&C applies)</button>
           <button className={styles.btnOutline} onClick={() => setCheckoutPlan('growth')}>View Pricing</button>
         </div>
       </section>
