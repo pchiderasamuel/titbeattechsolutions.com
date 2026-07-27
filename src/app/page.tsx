@@ -282,8 +282,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* CONTACT US */}
+      <ContactSection />
+
       {/* CTA */}
-      <section className={styles.ctaSection} id="contact">
+      <section className={styles.ctaSection}>
         <p className={styles.sectionLabel}>Get Started Today</p>
         <h2>Let&apos;s Build the <span className={styles.ctaGradient}>Future of Education</span></h2>
         <p>TitbeatTechsolutions.app — Empowering schools, one subscription at a time.</p>
@@ -330,6 +333,211 @@ export default function HomePage() {
       <CheckoutModal plan={checkoutPlan} isAnnual={isAnnual} onClose={() => setCheckoutPlan(null)} />
       <AuthModal mode={authMode} onClose={() => setAuthMode(null)} onSwitchToCheckout={(p) => { setAuthMode(null); setCheckoutPlan(p); }} />
     </>
+  );
+}
+
+function ContactSection() {
+  const [topic, setTopic] = useState<string>('Free Trial Setup');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [channel, setChannel] = useState<'whatsapp' | 'email'>('whatsapp');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (channel === 'whatsapp') {
+      const text = `Hello TitbeatTechsolutions Support,\n\nI have an inquiry regarding: *${topic}*\n*Name/School:* ${name || 'Not provided'}\n*Email/Phone:* ${email || 'Not provided'}\n\n*Message:*\n${message || 'I would like to learn more about your K-12 school management software.'}`;
+      window.open(`https://wa.me/2349060446496?text=${encodeURIComponent(text)}`, '_blank');
+    } else {
+      const subject = `[${topic}] Inquiry from ${name || 'School Admin'}`;
+      const bodyText = `Hello TitbeatTechsolutions Support,\n\nI have an inquiry regarding: ${topic}\nName/School: ${name || 'Not provided'}\nEmail/Phone: ${email || 'Not provided'}\n\nMessage:\n${message || 'I would like to learn more about your K-12 school management software.'}`;
+      window.location.href = `mailto:titbeattechsolutions@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+    }
+  };
+
+  const topics = ['Free Trial Setup', 'Custom Demo & Pricing', 'Technical Support', 'Billing Inquiry'];
+
+  return (
+    <section className={styles.contactSection} id="contact">
+      <div className={styles.contactContainer}>
+        {/* LEFT COLUMN */}
+        <div className={styles.contactLeft}>
+          <div className={styles.contactBadge}>
+            <span>🇳🇬 Nigerian K-12 Support Team</span>
+          </div>
+          <h2>Talk to Our School Onboarding Specialists</h2>
+          <p>
+            Whether you are a school owner wanting a personalized demo, an administrator needing roll-call assistance, or a parent inquiry—our local technical specialists are ready to help you succeed.
+          </p>
+
+          <div className={styles.contactChannels}>
+            {/* WhatsApp Row */}
+            <a href="https://wa.me/2349060446496" target="_blank" rel="noopener noreferrer" className={styles.channelRow}>
+              <div className={styles.channelIcon} style={{ background: 'rgba(37,211,102,0.12)', color: '#25D366' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" fill="currentColor">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33 0-65.3-8.9-93.5-25.7l-6.7-4-69.5 18.2 18.6-67.8-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.4-186.6 184.4zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+                </svg>
+              </div>
+              <div className={styles.channelInfo}>
+                <h4>
+                  WhatsApp Live Chat <span className={styles.pulseGreen} title="Live & Online" />
+                </h4>
+                <p>Instant live chat support & step-by-step onboarding guidance directly from our Nigerian specialists.</p>
+                <div className={styles.channelActionText}>+234 906 044 6496 ↗</div>
+              </div>
+            </a>
+
+            {/* Email Row */}
+            <a href="mailto:titbeattechsolutions@gmail.com" className={styles.channelRow}>
+              <div className={styles.channelIcon} style={{ background: 'rgba(68,114,196,0.12)', color: 'var(--primary)' }}>
+                <svg viewBox="0 0 512 512" fill="currentColor" width="24" height="24">
+                  <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                </svg>
+              </div>
+              <div className={styles.channelInfo}>
+                <h4>Direct Billing & Support Email</h4>
+                <p>Have invoicing inquiries, formal school proposals, or technical questions? We reply within 2 hours.</p>
+                <div className={styles.channelActionText}>titbeattechsolutions@gmail.com ↗</div>
+              </div>
+            </a>
+
+            {/* Support Hours Row */}
+            <div className={styles.channelRow} style={{ cursor: 'default' }}>
+              <div className={styles.channelIcon} style={{ background: 'rgba(237,125,49,0.12)', color: 'var(--orange)' }}>
+                <svg viewBox="0 0 512 512" fill="currentColor" width="24" height="24">
+                  <path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+                </svg>
+              </div>
+              <div className={styles.channelInfo}>
+                <h4>Support & Office Hours</h4>
+                <p>Our dedicated technical assistance and onboarding team is online Monday through Friday.</p>
+                <div className={styles.channelActionText} style={{ color: 'var(--text)' }}>8:00 AM – 6:00 PM WAT (Nigeria Time)</div>
+              </div>
+            </div>
+
+            {/* Socials Row */}
+            <div className={styles.socialsRow}>
+              <span className={styles.socialsLabel}>Follow Our Community:</span>
+              <a href="https://web.facebook.com/profile.php?id=61591661423267" target="_blank" rel="noopener noreferrer" className={styles.socialBadge}>
+                <svg viewBox="0 0 320 512" fill="currentColor" width="14" height="14">
+                  <path d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z" />
+                </svg>
+                <span>Facebook</span>
+              </a>
+              <a href="https://www.linkedin.com/company/titbeattechsolutions/" target="_blank" rel="noopener noreferrer" className={styles.socialBadge}>
+                <svg viewBox="0 0 448 512" fill="currentColor" width="14" height="14">
+                  <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://www.tiktok.com/@titbeattechsolution" target="_blank" rel="noopener noreferrer" className={styles.socialBadge}>
+                <svg viewBox="0 0 448 512" fill="currentColor" width="14" height="14">
+                  <path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z" />
+                </svg>
+                <span>TikTok</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: INQUIRY FORM CARD */}
+        <div className={styles.inquiryCard}>
+          <div className={styles.inquiryCardBar} />
+          <div className={styles.inquiryHeader}>
+            <h3>Interactive Inquiry Generator</h3>
+            <p>Send a pre-formatted inquiry directly to our sales & onboarding team.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div className={styles.formGroup}>
+              <label>1. What can we help your school with?</label>
+              <div className={styles.topicsGrid}>
+                {topics.map((t) => (
+                  <button
+                    type="button"
+                    key={t}
+                    className={`${styles.topicPill} ${topic === t ? styles.topicPillActive : ''}`}
+                    onClick={() => setTopic(t)}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="inquiry-name">2. Your Name & School Name</label>
+              <input
+                id="inquiry-name"
+                type="text"
+                className={styles.formInput}
+                placeholder="e.g. Mr. Adebayo / Greenfield Academy Lagos"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="inquiry-email">3. Your Email or Phone Number</label>
+              <input
+                id="inquiry-email"
+                type="text"
+                className={styles.formInput}
+                placeholder="e.g. adebayo@greenfield.edu.ng or 08012345678"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label htmlFor="inquiry-message">4. Message / Questions (Optional)</label>
+              <textarea
+                id="inquiry-message"
+                className={styles.formTextarea}
+                placeholder="Tell us about your school size, current challenges, or specific features you need..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.submitRow}>
+              <div className={styles.channelSwitch}>
+                <button
+                  type="button"
+                  className={`${styles.switchBtn} ${channel === 'whatsapp' ? styles.switchBtnActive : ''}`}
+                  onClick={() => setChannel('whatsapp')}
+                >
+                  ⚡ Send via WhatsApp (Instant)
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.switchBtn} ${channel === 'email' ? styles.switchBtnActive : ''}`}
+                  onClick={() => setChannel('email')}
+                >
+                  📧 Send via Email Client
+                </button>
+              </div>
+
+              {channel === 'whatsapp' ? (
+                <button type="submit" className={styles.submitBtnWa}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18" fill="currentColor">
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33 0-65.3-8.9-93.5-25.7l-6.7-4-69.5 18.2 18.6-67.8-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.4-186.6 184.4zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+                  </svg>
+                  <span>Launch WhatsApp Live Chat Now ↗</span>
+                </button>
+              ) : (
+                <button type="submit" className={styles.submitBtnEmail}>
+                  <svg viewBox="0 0 512 512" fill="currentColor" width="18" height="18">
+                    <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                  </svg>
+                  <span>Draft Email in Mail Client ↗</span>
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 }
 
