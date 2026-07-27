@@ -6,6 +6,7 @@ interface Props { mode: 'login' | 'signup' | null; onClose: () => void; onSwitch
 
 export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) {
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
 
   // Signup form state
@@ -23,7 +24,7 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); setLoading(true);
+    setError(''); setFieldErrors({}); setLoading(true);
     try {
       const res = await fetch('/api/checkout/initiate', {
         method: 'POST',
@@ -43,7 +44,17 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
       if (res.ok && data.authorization_url) {
         window.location.href = data.authorization_url;
       } else {
-        setError(data.error || 'Failed to start signup. Please try again.');
+        if (data.details && Array.isArray(data.details)) {
+          const errMap: Record<string, string> = {};
+          data.details.forEach((issue: any) => {
+            const field = issue.path?.[0];
+            if (field) errMap[field] = issue.message;
+          });
+          setFieldErrors(errMap);
+          setError(data.error || 'Please check the highlighted fields below.');
+        } else {
+          setError(data.error || 'Failed to start signup. Please try again.');
+        }
         setLoading(false);
       }
     } catch {
@@ -68,34 +79,41 @@ export default function AuthModal({ mode, onClose, onSwitchToCheckout }: Props) 
                 <div className={styles.field}>
                   <label>Last Name</label>
                   <input value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Okonkwo" required />
+                  {fieldErrors.adminName && <span className={styles.fieldError}>{fieldErrors.adminName}</span>}
                 </div>
               </div>
               <div className={styles.field}>
                 <label>School Name</label>
                 <input value={school} onChange={e => setSchool(e.target.value)} placeholder="Greenfield Academy" required minLength={3} />
+                {fieldErrors.schoolName && <span className={styles.fieldError}>{fieldErrors.schoolName}</span>}
               </div>
               <div className={styles.field}>
                 <label>Email Address</label>
                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@yourschool.edu.ng" required />
+                {fieldErrors.adminEmail && <span className={styles.fieldError}>{fieldErrors.adminEmail}</span>}
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className={styles.field}>
                   <label>Country</label>
                   <input value={country} onChange={e => setCountry(e.target.value)} placeholder="Nigeria" required />
+                  {fieldErrors.country && <span className={styles.fieldError}>{fieldErrors.country}</span>}
                 </div>
                 <div className={styles.field}>
                   <label>State</label>
                   <input value={stateLoc} onChange={e => setStateLoc(e.target.value)} placeholder="Lagos" required />
+                  {fieldErrors.state && <span className={styles.fieldError}>{fieldErrors.state}</span>}
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                 <div className={styles.field}>
                   <label>LGA</label>
                   <input value={lga} onChange={e => setLga(e.target.value)} placeholder="Ikeja" required />
+                  {fieldErrors.lga && <span className={styles.fieldError}>{fieldErrors.lga}</span>}
                 </div>
                 <div className={styles.field}>
                   <label>Address</label>
                   <input value={address} onChange={e => setAddress(e.target.value)} placeholder="123 School Road" required />
+                  {fieldErrors.address && <span className={styles.fieldError}>{fieldErrors.address}</span>}
                 </div>
               </div>
               <div className={styles.field}>

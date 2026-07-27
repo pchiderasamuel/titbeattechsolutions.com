@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse, after } from 'next/server';
 import { verifyWebhookSignature } from '@/lib/paystack';
+import { rateLimit } from '@/lib/rateLimit';
 import {
   isEventProcessed,
   markEventProcessed,
@@ -27,6 +28,13 @@ import {
  * No express.raw() middleware needed — Next.js gives us stream access natively.
  */
 export async function POST(req: NextRequest) {
+  // ── 0. Rate limiting (100 req/min per IP to prevent DDoS) ─────
+  const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+  const { allowed } = await rateLimit({ windowMs: 60 * 1000, max: 100, key: `webhook:${ip}` });
+  if (!allowed) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+  }
+
   // ── 1. Get raw body FIRST (before parsing) ─────────────────────
   // This is the Next.js equivalent of express.raw({ type: 'application/json' }).
   const rawBody = await req.text();

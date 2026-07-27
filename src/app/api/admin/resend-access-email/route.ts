@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import { sendWelcomeEmail } from '@/lib/email';
+import { rateLimit } from '@/lib/rateLimit';
+import { env } from '@/lib/env';
 
 const resendSchema = z.object({
   adminEmail: z.string().email(),
@@ -18,11 +20,32 @@ const resendSchema = z.object({
  * Add `Authorization: Bearer <ADMIN_API_KEY>` to the request header.
  */
 export async function POST(req: NextRequest) {
-  // ── Bearer token auth check ─────────────────────────────────────
-  const authHeader = req.headers.get('authorization') || '';
-  const adminKey   = process.env.ADMIN_API_KEY;
+  // ── Rate limiting (10 req/15 min per IP) ────────────────────────
+  const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
+  const { allowed } = await rateLimit({ windowMs: 15 * 60 * 1000, max: 10, key: `admin-resend:${ip}` });
+  if (!allowed) {
+    return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+  }
 
-  if (!adminKey || authHeader !== `Bearer ${adminKey}`) {
+  // ── Bearer token / RBAC auth check ──────────────────────────────
+  const authHeader = req.headers.get('authorization') || '';
+  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : '';
+  let isAuthorized = false;
+
+  // Check 1: Static ADMIN_API_KEY
+  if (env.ADMIN_API_KEY && token === env.ADMIN_API_KEY) {
+    isAuthorized = true;
+  }
+
+  // Check 2: Supabase Auth JWT with admin role
+  if (!isAuthorized && token) {
+    const { data: { user }, error: authErr } = await supabaseAdmin.auth.getUser(token);
+    if (!authErr && user && (user.user_metadata?.role === 'admin' || user.user_metadata?.role === 'superadmin')) {
+      isAuthorized = true;
+    }
+  }
+
+  if (!isAuthorized) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

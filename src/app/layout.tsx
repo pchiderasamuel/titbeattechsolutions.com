@@ -5,9 +5,32 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'TitbeatTechsolutions.app — Run Your School Smarter',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://titbeattechsolutions.app'),
+  title: {
+    default: 'TitbeatTechsolutions.app — Run Your School Smarter',
+    template: '%s | TitbeatTechsolutions',
+  },
   description:
     'Cloud-based school management SaaS for Nigerian K-12 schools. Manage students, fees, timetables and staff from one dashboard. Start your free trial today.',
+  keywords: ['school management Nigeria', 'K-12 software', 'school management system', 'TitbeatTech', 'edtech Nigeria', 'school portal'],
+  authors: [{ name: 'TitbeatTech Solutions' }],
+  creator: 'TitbeatTech Solutions',
+  openGraph: {
+    type: 'website',
+    locale: 'en_NG',
+    url: 'https://titbeattechsolutions.app',
+    title: 'TitbeatTechsolutions.app — Run Your School Smarter',
+    description:
+      'Cloud-based school management SaaS for Nigerian K-12 schools. Manage fees, students, and staff effortlessly.',
+    siteName: 'TitbeatTechsolutions',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TitbeatTechsolutions.app — Run Your School Smarter',
+    description:
+      'Cloud-based school management SaaS for Nigerian K-12 schools. Manage fees, students, and staff effortlessly.',
+    creator: '@titbeattech',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

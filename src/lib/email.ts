@@ -1,12 +1,13 @@
 import { Resend } from 'resend';
+import { env } from '@/lib/env';
 
-if (!process.env.RESEND_API_KEY) {
+if (!env.RESEND_API_KEY) {
   console.warn('[email] RESEND_API_KEY not set — emails will be logged only');
 }
 
-const resend  = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-const FROM    = process.env.EMAIL_FROM || 'TitbeatTech <noreply@titbeattechsolutions.app>';
-const APP_URL = process.env.APP_URL   || 'https://app.titbeattechsolutions.app';
+const resend  = env.RESEND_API_KEY ? new Resend(env.RESEND_API_KEY) : null;
+const FROM    = env.EMAIL_FROM;
+const APP_URL = env.APP_URL;
 
 /** ─────────────────────────────────────────────────────────────────
  *  sendWelcomeEmail

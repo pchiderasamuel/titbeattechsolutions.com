@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { initializeTransaction, PLAN_CODES } from '@/lib/paystack';
 import { rateLimit } from '@/lib/rateLimit';
+import { env } from '@/lib/env';
 
 const checkoutSchema = z.object({
   schoolName:  z.string().min(3, 'School name must be at least 3 characters'),
@@ -30,7 +31,7 @@ const checkoutSchema = z.object({
 export async function POST(req: NextRequest) {
   // ── Rate limiting ───────────────────────────────────────────────
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown';
-  const { allowed } = rateLimit({ windowMs: 15 * 60 * 1000, max: 20, key: `checkout:${ip}` });
+  const { allowed } = await rateLimit({ windowMs: 15 * 60 * 1000, max: 20, key: `checkout:${ip}` });
   if (!allowed) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://titbeattechsolutions.app';
+    const siteUrl = env.NEXT_PUBLIC_SITE_URL;
     const callbackUrl = `${siteUrl}/checkout-success`;
 
     const { authorization_url, reference } = await initializeTransaction({
