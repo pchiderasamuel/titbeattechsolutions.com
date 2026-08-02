@@ -359,7 +359,15 @@ function ContactSection() {
     } else {
       const subject = `[${topic}] Inquiry from ${name || 'School Admin'}`;
       const bodyText = `Hello TitbeatTechsolutions Support,\n\nI have an inquiry regarding: ${topic}\nName/School: ${name || 'Not provided'}\nEmail/Phone: ${email || 'Not provided'}\n\nMessage:\n${message || 'I would like to learn more about your K-12 school management software.'}`;
-      window.location.href = `mailto:titbeattechsolutions@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+      
+      const mailtoUrl = `mailto:titbeattechsolutions@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+      const a = document.createElement('a');
+      a.href = mailtoUrl;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
   };
 
