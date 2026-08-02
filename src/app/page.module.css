@@ -197,10 +197,10 @@
 
 @media(max-width:900px){
   .hero{min-height:auto;padding-top:7rem;padding-bottom:2rem}
-  .heroInner{grid-template-columns:1fr;gap:2rem;text-align:center}
-  .heroContent{align-items:center}
-  .heroStats{justify-content:center}
-  .heroVisual{display:none}
+  .heroInner{grid-template-columns:1fr;gap:3rem;text-align:left}
+  .heroContent{align-items:flex-start}
+  .heroStats{justify-content:flex-start}
+  /* Removed .heroVisual{display:none} to allow dashboard to show below text */
   .footerMain{grid-template-columns:1fr 1fr}
   .aboutGrid{grid-template-columns:1fr}
   .contactContainer{grid-template-columns:1fr;gap:3rem}
