@@ -73,7 +73,7 @@ export async function provisionSchool(params: {
     planTier, country, stateLoc, lga, address, paystackCustomerCode, paystackSubscriptionCode,
   } = params;
 
-  // ── 1. Duplicate email guard ───────────────────────────────────
+  // ── 1. Duplicate email guard (Local) ───────────────────────────
   const { data: existingUser } = await supabaseAdmin
     .from('users')
     .select('id, school_id, subscription_status')
@@ -81,7 +81,7 @@ export async function provisionSchool(params: {
     .maybeSingle();
 
   if (existingUser) {
-    console.warn(`[provision] Duplicate signup for ${adminEmail} — re-activating existing record`);
+    console.warn(`[provision] Duplicate signup for ${adminEmail} — re-activating existing local record`);
 
     await supabaseAdmin
       .from('schools')
@@ -102,7 +102,66 @@ export async function provisionSchool(params: {
     return { success: true };
   }
 
-  // ── 2. Create school record ────────────────────────────────────
+  // ── 2. Call myschoolgradeflow S2S Provisioning API ─────────────
+  const tempPassword = generateTempPassword();
+  // Using a short code derived from the school name
+  const code = schoolName.substring(0, 3).toUpperCase() + Math.floor(Math.random() * 1000);
+  
+  const productApiUrl = process.env.MYSCHOOLGRADEFLOW_API_URL || "https://myschoolgradeflow.supabase.co/functions/v1/provision-school";
+  const productApiSecret = process.env.PROVISIONING_SECRET || "";
+
+  try {
+    const apiResponse = await fetch(productApiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-provisioning-secret': productApiSecret
+      },
+      body: JSON.stringify({
+        idempotencyKey: paystackCustomerCode, // using customer code as idempotency key
+        school: {
+          name: schoolName,
+          code: code,
+          email: adminEmail,
+          address: {
+            street: address || "",
+            city: lga || "",
+            state: stateLoc || ""
+          }
+        },
+        admin: {
+          name: adminName,
+          email: adminEmail,
+          tempPassword: tempPassword
+        },
+        subscription: {
+          plan: planTier,
+          paymentMethod: "paystack",
+          transactionRef: paystackSubscriptionCode
+        }
+      })
+    });
+
+    if (!apiResponse.ok) {
+      const errData = await apiResponse.json().catch(() => ({}));
+      console.error('[provision] myschoolgradeflow API error:', errData);
+      throw new Error(`API returned ${apiResponse.status}: ${JSON.stringify(errData)}`);
+    }
+  } catch (apiError) {
+    console.error('[provision] Failed to call product API:', apiError);
+    // Log for manual recovery
+    await supabaseAdmin.from('provisioning_failures').insert({
+      admin_email: adminEmail,
+      school_name: schoolName,
+      plan_tier: planTier,
+      paystack_customer_code: paystackCustomerCode,
+      error: apiError instanceof Error ? apiError.message : JSON.stringify(apiError),
+      created_at: new Date().toISOString(),
+    });
+    return { success: false, error: 'Product API provisioning failed' };
+  }
+
+  // ── 3. Create local billing/school record ──────────────────────
   const { data: school, error: schoolError } = await supabaseAdmin
     .from('schools')
     .insert({
@@ -122,72 +181,25 @@ export async function provisionSchool(params: {
     .single();
 
   if (schoolError || !school) {
-    console.error('[provision] Failed to create school record:', schoolError);
-    // PARTIAL FAILURE: Paystack payment succeeded but DB write failed.
-    // Log for manual recovery — a paying customer must not be silently dropped.
-    await supabaseAdmin.from('provisioning_failures').insert({
-      admin_email: adminEmail,
-      school_name: schoolName,
-      plan_tier: planTier,
-      paystack_customer_code: paystackCustomerCode,
-      error: JSON.stringify(schoolError),
-      created_at: new Date().toISOString(),
-    });
-    return { success: false, error: 'School DB write failed' };
+    console.error('[provision] Failed to create local school record:', schoolError);
   }
 
-  // ── 3. Create Supabase Auth user with temp password ───────────
-  const tempPassword = generateTempPassword();
-
-  const { data: authUser, error: authError } = await supabaseAdmin.auth.admin.createUser({
-    email: adminEmail,
-    password: tempPassword,
-    email_confirm: true,       // skip email-confirm loop — we handle delivery ourselves
-    user_metadata: {
-      full_name: adminName,
+  // ── 4. Create local user record for billing sync ───────────────
+  if (school) {
+    const { error: userError } = await supabaseAdmin.from('users').insert({
+      id: crypto.randomUUID(),
+      admin_email: adminEmail,
+      admin_name: adminName,
+      role: 'admin',
       school_id: school.id,
+      subscription_status: 'active',
       must_reset_password: true,
-    },
-  });
-
-  if (authError || !authUser.user) {
-    console.error('[provision] Supabase auth.createUser failed:', authError);
-    // Roll back the school row to keep DB consistent
-    await supabaseAdmin.from('schools').delete().eq('id', school.id);
-    await supabaseAdmin.from('provisioning_failures').insert({
-      admin_email: adminEmail,
-      school_name: schoolName,
-      plan_tier: planTier,
-      paystack_customer_code: paystackCustomerCode,
-      error: JSON.stringify(authError),
       created_at: new Date().toISOString(),
     });
-    return { success: false, error: 'Auth user creation failed' };
-  }
 
-  // ── 4. Create users table row ──────────────────────────────────
-  const { error: userError } = await supabaseAdmin.from('users').insert({
-    id: authUser.user.id,
-    admin_email: adminEmail,
-    admin_name: adminName,
-    role: 'admin',
-    school_id: school.id,
-    subscription_status: 'active',
-    must_reset_password: true,
-    created_at: new Date().toISOString(),
-  });
-
-  if (userError) {
-    // Non-fatal — auth user was created. Log for manual fix.
-    console.error('[provision] Failed to insert users row:', userError);
-    await supabaseAdmin.from('provisioning_failures').insert({
-      admin_email: adminEmail,
-      school_name: schoolName,
-      plan_tier: planTier,
-      paystack_customer_code: paystackCustomerCode,
-      error: `users row: ${JSON.stringify(userError)}`,
-      created_at: new Date().toISOString(),
-    });
+    if (userError) {
+      console.error('[provision] Failed to insert local users row:', userError);
+    }
   }
 
   // ── 5. Send welcome email ──────────────────────────────────────
@@ -203,7 +215,7 @@ export async function provisionSchool(params: {
     console.error(`[provision] Welcome email failed for ${adminEmail} — logging for manual resend`);
     await supabaseAdmin.from('email_failures').insert({
       admin_email: adminEmail,
-      school_id: school.id,
+      school_id: school?.id || crypto.randomUUID(),
       failure_type: 'welcome',
       created_at: new Date().toISOString(),
     });
