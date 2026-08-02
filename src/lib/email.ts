@@ -32,8 +32,9 @@ export async function sendWelcomeEmail(params: {
                   border:1px solid #D4E5FF;overflow:hidden;">
         <!-- Header -->
         <div style="background:#003366;padding:28px 32px;">
+          <img src="${env.NEXT_PUBLIC_SITE_URL}/tbt-logo-white.png" alt="TitbeatTech Solutions" width="200" style="display:block;border:none;outline:none;margin-bottom:24px;" />
           <h1 style="color:#fff;margin:0;font-size:22px;font-weight:800;">
-            Welcome to TitbeatTech! 🎉
+            Welcome to TitbeatTech! 🚀
           </h1>
           <p style="color:#94A3B8;margin:6px 0 0;font-size:14px;">
             Your school management platform is ready
