@@ -322,7 +322,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className={styles.footerCol}><h4>Product</h4><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#how-it-works">How it Works</a></div>
-          <div className={styles.footerCol}><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact Sales</a><a href="mailto:titbeattechsolutions@gmail.com">Support</a></div>
+          <div className={styles.footerCol}><h4>Company</h4><a href="#about">About Us</a><a href="#contact">Contact Sales</a><a href="mailto:titbeattechsolutions@gmail.com">Support</a><a href="mailto:titbeattechsolutions@gmail.com?subject=Partnership Inquiry">Partners & Affiliates</a><a href="mailto:titbeattechsolutions@gmail.com?subject=Careers Inquiry">Careers</a></div>
           <div className={styles.footerCol}><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/ndpr-compliance">NDPR Compliance</a></div>
         </div>
         <div className={styles.footerBottom}>
