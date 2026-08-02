@@ -196,7 +196,7 @@
 .brandSub{color:#ED7D31;font-size:0.7rem;letter-spacing:3px;align-self:flex-end;padding-bottom:2px}
 
 @media(max-width:900px){
-  .hero{min-height:auto;padding-top:7rem;padding-bottom:2rem}
+  .hero{min-height:auto;padding-top:8rem;padding-bottom:2rem}
   .heroInner{grid-template-columns:1fr;gap:3rem;text-align:left}
   .heroContent{align-items:flex-start}
   .heroStats{justify-content:flex-start}
