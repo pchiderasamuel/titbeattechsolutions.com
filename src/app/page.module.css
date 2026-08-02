@@ -196,7 +196,10 @@
 .brandSub{color:#ED7D31;font-size:0.7rem;letter-spacing:3px;align-self:flex-end;padding-bottom:2px}
 
 @media(max-width:900px){
-  .heroInner{grid-template-columns:1fr}
+  .hero{min-height:auto;padding-top:7rem;padding-bottom:2rem}
+  .heroInner{grid-template-columns:1fr;gap:2rem;text-align:center}
+  .heroContent{align-items:center}
+  .heroStats{justify-content:center}
   .heroVisual{display:none}
   .footerMain{grid-template-columns:1fr 1fr}
   .aboutGrid{grid-template-columns:1fr}
