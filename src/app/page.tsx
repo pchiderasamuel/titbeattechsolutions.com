@@ -6,7 +6,6 @@ import styles from './page.module.css';
 
 export default function HomePage() {
   const [checkoutPlan, setCheckoutPlan] = useState<string | null>(null);
-  const [checkoutPlan, setCheckoutPlan] = useState<string | null>(null);
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
