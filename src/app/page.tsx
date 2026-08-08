@@ -2,19 +2,17 @@
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import CheckoutModal from '@/components/CheckoutModal';
-import AuthModal from '@/components/AuthModal';
 import styles from './page.module.css';
 
 export default function HomePage() {
   const [checkoutPlan, setCheckoutPlan] = useState<string | null>(null);
-  const [authMode, setAuthMode] = useState<'login' | 'signup' | null>(null);
+  const [checkoutPlan, setCheckoutPlan] = useState<string | null>(null);
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
     <>
       <Navbar
-        onSignup={() => setAuthMode('signup')}
-        onLogin={() => setAuthMode('login')}
+        onSignup={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
       />
 
       {/* HERO */}
@@ -25,7 +23,7 @@ export default function HomePage() {
             <h1 className={styles.heroH1}>Run Your School Smarter.<br/><span className={styles.highlight}>Everything in One Place.</span></h1>
             <p>TitbeatTechsolutions.app helps K-12 school admins and teachers manage students records,attendance, roll-call, result generation, track fees, send notifications and run timetables — all from one dashboard, on any device.</p>
             <div className={styles.heroBtns}>
-              <button className={styles.btnPrimary} onClick={() => setAuthMode('signup')}>Start Free Trial</button>
+              <button className={styles.btnPrimary} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Start Free Trial</button>
               <a href="#how-it-works" className={styles.btnOutline}>See How It Works</a>
             </div>
             <div className={styles.heroStats}>
@@ -265,7 +263,7 @@ export default function HomePage() {
             <p className={styles.sectionLabel}>About Us</p>
             <h2 className={styles.sectionTitle}>Built for Nigerian Schools, by Nigerians.</h2>
             <p className={styles.sectionSub}>TitbeatTechsolutions was born out of a simple observation: Nigerian school administrators and teachers spend too much time on paperwork, and not enough time on what truly matters—shaping the future of our children. A cloud saas app was built to change that — giving every Nigerian school access to enterprise-grade management tools at an affordable subscription.</p>
-            <button className={styles.btnPrimary} style={{ marginTop:'1.5rem' }} onClick={() => setAuthMode('signup')}>Join Our Growing Community</button>
+            <button className={styles.btnPrimary} style={{ marginTop:'1.5rem' }} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Join Our Growing Community</button>
           </div>
           <div className={styles.aboutCards}>
             {[['🎯','Mission','Empower Nigerian Schools'],['🌍','Market','Nigerian K-12 Private Schools'],['📋','Compliance','NDPR Compliant'],['📱','Access','Mobile-First Design']].map(([icon,h,v]) => (
@@ -299,8 +297,8 @@ export default function HomePage() {
         <h2>Let&apos;s Build the <span className={styles.ctaGradient}>Future of Education</span></h2>
         <p>TitbeatTechsolutions.app — Empowering schools, one subscription at a time.</p>
         <div className={styles.ctaBtns}>
-          <button className={styles.btnPrimary} onClick={() => setAuthMode('signup')}>Start Free Trial — No Card Needed (T&C applies)</button>
-          <button className={styles.btnOutline} onClick={() => setCheckoutPlan('growth')}>View Pricing</button>
+          <button className={styles.btnPrimary} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Start Free Trial — No Card Needed (T&C applies)</button>
+          <button className={styles.btnOutline} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>View Pricing</button>
         </div>
       </section>
 
@@ -340,7 +338,6 @@ export default function HomePage() {
       </a>
 
       <CheckoutModal plan={checkoutPlan} isAnnual={isAnnual} onClose={() => setCheckoutPlan(null)} />
-      <AuthModal mode={authMode} onClose={() => setAuthMode(null)} onSwitchToCheckout={(p) => { setAuthMode(null); setCheckoutPlan(p); }} />
     </>
   );
 }

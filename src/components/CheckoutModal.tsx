@@ -3,10 +3,10 @@ import { useState } from 'react';
 import styles from './CheckoutModal.module.css';
 
 const PLANS: Record<string, { name: string; students: string; basePrice: number; plus?: boolean }> = {
-  micro:      { name: 'Micro',      students: 'Up to 200 students',   basePrice: 18000 },
-  starter:    { name: 'Starter',    students: 'Up to 500 students',   basePrice: 45000 },
-  growth:     { name: 'Growth',     students: 'Up to 1,000 students', basePrice: 90000 },
-  enterprise: { name: 'Enterprise', students: '1,001+ students',      basePrice: 150000, plus: true },
+  micro:      { name: 'Micro',      students: 'Up to 200 students',   basePrice: 20000 },
+  starter:    { name: 'Starter',    students: 'Up to 500 students',   basePrice: 52000 },
+  growth:     { name: 'Growth',     students: 'Up to 1,000 students', basePrice: 105000 },
+  enterprise: { name: 'Enterprise', students: '1,001+ students',      basePrice: 112500, plus: true },
 };
 
 interface Props { plan: string | null; isAnnual?: boolean; onClose: () => void; }
@@ -46,6 +46,7 @@ export default function CheckoutModal({ plan, isAnnual, onClose }: Props) {
           adminName: `${firstName} ${lastName}`.trim(),
           adminEmail: email,
           plan,
+          isAnnual,
           country,
           state: stateLoc,
           lga,

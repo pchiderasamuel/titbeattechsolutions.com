@@ -1,12 +1,14 @@
 import crypto from 'crypto';
 
-// ── Env validation (runs at module import time on the server) ──────
-if (!process.env.PAYSTACK_SECRET_KEY) {
-  throw new Error('Missing PAYSTACK_SECRET_KEY environment variable');
-}
+// ── Env validation (deferred to runtime) ──────
+const getSecretKey = () => {
+  if (!process.env.PAYSTACK_SECRET_KEY) {
+    throw new Error('Missing PAYSTACK_SECRET_KEY environment variable');
+  }
+  return process.env.PAYSTACK_SECRET_KEY;
+};
 
 const PAYSTACK_BASE = 'https://api.paystack.co';
-const SECRET_KEY    = process.env.PAYSTACK_SECRET_KEY as string;
 
 /** Plan codes pre-created in your Paystack dashboard. */
 export const PLAN_CODES: Record<string, string> = {
@@ -16,14 +18,22 @@ export const PLAN_CODES: Record<string, string> = {
   enterprise: process.env.PAYSTACK_PLAN_ENTERPRISE || '',
 };
 
+export const ANNUAL_PLAN_CODES: Record<string, string> = {
+  micro:      process.env.PAYSTACK_PLAN_MICRO_ANNUAL      || '',
+  starter:    process.env.PAYSTACK_PLAN_STARTER_ANNUAL    || '',
+  growth:     process.env.PAYSTACK_PLAN_GROWTH_ANNUAL     || '',
+  enterprise: process.env.PAYSTACK_PLAN_ENTERPRISE_ANNUAL || '',
+};
+
 /** Map Paystack plan codes back to tier names — used in subscription.create webhook. */
-export const PLAN_CODE_TO_TIER: Record<string, string> = Object.fromEntries(
-  Object.entries(PLAN_CODES).map(([tier, code]) => [code, tier])
-);
+export const PLAN_CODE_TO_TIER: Record<string, string> = {
+  ...Object.fromEntries(Object.entries(PLAN_CODES).map(([tier, code]) => [code, tier])),
+  ...Object.fromEntries(Object.entries(ANNUAL_PLAN_CODES).map(([tier, code]) => [code, tier]))
+};
 
 function paystackHeaders() {
   return {
-    Authorization: `Bearer ${SECRET_KEY}`,
+    Authorization: `Bearer ${getSecretKey()}`,
     'Content-Type': 'application/json',
   };
 }
@@ -36,12 +46,14 @@ function paystackHeaders() {
  * ───────────────────────────────────────────────────────────────── */
 export async function initializeTransaction(params: {
   email: string;
+  amount: number;
   planCode: string;
   metadata: Record<string, string>;
   callbackUrl: string;
 }): Promise<{ authorization_url: string; reference: string }> {
   const body = {
     email: params.email,
+    amount: params.amount.toString(),
     plan: params.planCode,
     callback_url: params.callbackUrl,
     metadata: {
@@ -76,7 +88,7 @@ export async function initializeTransaction(params: {
  * ───────────────────────────────────────────────────────────────── */
 export function verifyWebhookSignature(rawBody: string, signature: string): boolean {
   const hash = crypto
-    .createHmac('sha512', SECRET_KEY)
+    .createHmac('sha512', getSecretKey())
     .update(rawBody)
     .digest('hex');
   return hash === signature;
