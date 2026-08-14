@@ -125,7 +125,7 @@ export default function CheckoutModal({ plan, isAnnual, onClose }: Props) {
               </div>
               <p style={{ marginBottom: '1rem', fontSize: '0.9rem', color: 'var(--muted)' }}>Account Name: <strong>TITBEAT TECH SOLUTION</strong></p>
               <div style={{ padding: '1rem', background: 'rgba(68,114,196,0.1)', borderRadius: '8px', border: '1px solid rgba(68,114,196,0.3)', fontSize: '0.85rem', color: 'var(--white)', lineHeight: 1.5 }}>
-                After payment, send your receipt and tracking reference <strong style={{ color: '#FBBF24', fontFamily: 'monospace', fontSize: '0.95rem' }}>{bankRef}</strong> to WhatsApp support at <a href={`https://wa.me/2349060446496?text=Hello%2C%20I%20just%20made%20a%20bank%20transfer%20for%20my%20school%20subscription.%20My%20reference%20is%20${bankRef}`} target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'underline' }}>+234 906 044 6496</a> for instant provisioning.
+                After payment, send your receipt and tracking reference <strong style={{ color: '#FBBF24', fontFamily: 'monospace', fontSize: '0.95rem' }}>{bankRef}</strong> to WhatsApp support at <a href={`https://wa.me/2349049524320?text=Hello%2C%20I%20just%20made%20a%20bank%20transfer%20for%20my%20school%20subscription.%20My%20reference%20is%20${bankRef}`} target="_blank" rel="noreferrer" style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'underline' }}>+234 904 952 4320</a> for instant provisioning.
               </div>
             </div>
           ) : (
