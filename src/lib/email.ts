@@ -34,7 +34,7 @@ export async function sendWelcomeEmail(params: {
         <div style="background:#003366;padding:28px 32px;">
           <img src="${env.NEXT_PUBLIC_SITE_URL}/tbt-logo-white.png" alt="TitbeatTech Solutions" width="200" style="display:block;border:none;outline:none;margin-bottom:24px;" />
           <h1 style="color:#fff;margin:0;font-size:22px;font-weight:800;">
-            Welcome to TitbeatTech! 🚀
+            Welcome to Titbeat SchoolPro! 🚀
           </h1>
           <p style="color:#94A3B8;margin:6px 0 0;font-size:14px;">
             Your school management platform is ready
@@ -85,7 +85,7 @@ export async function sendWelcomeEmail(params: {
           <hr style="border:none;border-top:1px solid #E2E8F0;margin:28px 0;" />
 
           <p style="color:#64748B;font-size:13px;line-height:1.7;margin:0;">
-            If you did not sign up for TitbeatTech or believe this email was sent in error,
+            If you did not sign up for Titbeat SchoolPro or believe this email was sent in error,
             please contact us at
             <a href="mailto:support@titbeattechsolutions.app" style="color:#2563EB;">
               support@titbeattechsolutions.app
@@ -106,7 +106,7 @@ export async function sendWelcomeEmail(params: {
     const { error } = await resend.emails.send({
       from: FROM,
       to,
-      subject: `Your TitbeatTech school account is ready — ${schoolName}`,
+      subject: `Your Titbeat SchoolPro account is ready — ${schoolName}`,
       html,
     });
 

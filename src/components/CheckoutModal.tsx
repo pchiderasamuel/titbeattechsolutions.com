@@ -80,7 +80,7 @@ export default function CheckoutModal({ plan, isAnnual, onClose }: Props) {
     <div className={styles.overlay} onClick={e => e.target === e.currentTarget && onClose()}>
       <div className={styles.modal}>
         <div className={styles.summary}>
-          <h3>{p.name} Plan</h3>
+          <h3>Titbeat SchoolPro - {p.name}</h3>
           <div className={styles.badge}>{p.name}</div>
           <div className={styles.row}><span>Capacity</span><span>{p.students}</span></div>
           <div className={styles.row}><span>Billing</span><span>{isAnnual ? 'Annually (3 Terms)' : 'Termly'}</span></div>

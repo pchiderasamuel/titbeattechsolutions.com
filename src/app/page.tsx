@@ -20,7 +20,7 @@ export default function HomePage() {
           <div className={styles.heroContent}>
             <div className={styles.badge}><span/>Cloud SaaS for Nigerian Schools</div>
             <h1 className={styles.heroH1}>Run Your School Smarter.<br/><span className={styles.highlight}>Everything in One Place.</span></h1>
-            <p>TitbeatTechsolutions.app helps K-12 school admins and teachers manage students records,attendance, roll-call, result generation, track fees, send notifications and run timetables — all from one dashboard, on any device.</p>
+            <p><strong>Titbeat SchoolPro</strong> helps K-12 school admins and teachers manage students records,attendance, roll-call, result generation, track fees, send notifications and run timetables — all from one dashboard, on any device. <br/><span style={{ fontSize: '0.85em', opacity: 0.7 }}>A product by Titbeat Techsolutions</span></p>
             <div className={styles.heroBtns}>
               <button className={styles.btnPrimary} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Start Free Trial</button>
               <a href="#how-it-works" className={styles.btnOutline}>See How It Works</a>
@@ -261,7 +261,7 @@ export default function HomePage() {
           <div>
             <p className={styles.sectionLabel}>About Us</p>
             <h2 className={styles.sectionTitle}>Built for Nigerian Schools, by Nigerians.</h2>
-            <p className={styles.sectionSub}>TitbeatTechsolutions was born out of a simple observation: Nigerian school administrators and teachers spend too much time on paperwork, and not enough time on what truly matters—shaping the future of our children. A cloud saas app was built to change that — giving every Nigerian school access to enterprise-grade management tools at an affordable subscription.</p>
+            <p className={styles.sectionSub}>Titbeat Techsolutions was born out of a simple observation: Nigerian school administrators and teachers spend too much time on paperwork, and not enough time on what truly matters—shaping the future of our children. <strong>Titbeat SchoolPro</strong> was built to change that — giving every Nigerian school access to enterprise-grade management tools at an affordable subscription.</p>
             <button className={styles.btnPrimary} style={{ marginTop:'1.5rem' }} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Join Our Growing Community</button>
           </div>
           <div className={styles.aboutCards}>
@@ -283,7 +283,7 @@ export default function HomePage() {
           <FaqItem q="What payment methods are supported?" a="We accept card payments (Visa, Mastercard, Verve), bank transfers and USSD payments via Paystack — the most popular payment methods for Nigerian schools."/>
           <FaqItem q="Can I switch plans later?" a="Yes. You can upgrade or downgrade your plan at any time. Upgrades take effect immediately; downgrades apply from the next billing term."/>
           <FaqItem q="Is my school's data safe?" a="Absolutely. All data is encrypted with 256-bit SSL, stored securely, and we are fully NDPR compliant. We never share your data with third parties without consent."/>
-          <FaqItem q="Does it work on mobile phones?" a="Yes — TitbeatTech is designed mobile-first. It works perfectly on Android and iOS phones, tablets, and desktops. No app download required."/>
+          <FaqItem q="Does it work on mobile phones?" a="Yes — Titbeat SchoolPro is designed mobile-first. It works perfectly on Android and iOS phones, tablets, and desktops. No app download required."/>
         </div>
       </section>
 
@@ -294,7 +294,7 @@ export default function HomePage() {
       <section className={styles.ctaSection}>
         <p className={styles.sectionLabel}>Get Started Today</p>
         <h2>Let&apos;s Build the <span className={styles.ctaGradient}>Future of Education</span></h2>
-        <p>TitbeatTechsolutions.app — Empowering schools, one subscription at a time.</p>
+        <p><strong>Titbeat SchoolPro</strong> — Empowering schools, one subscription at a time. <br/><span style={{ fontSize: '0.9em', opacity: 0.7 }}>A product by Titbeat Techsolutions</span></p>
         <div className={styles.ctaBtns}>
           <button className={styles.btnPrimary} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Start Free Trial — No Card Needed (T&C applies)</button>
           <button className={styles.btnOutline} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>View Pricing</button>
@@ -376,7 +376,13 @@ function ContactSection() {
         {/* LEFT COLUMN */}
         <div className={styles.contactLeft}>
           <div className={styles.contactBadge}>
-            <span>🇳🇬 Nigerian K-12 Support Team</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="16" height="12">
+                <path fill="#008751" d="M0 0h640v480H0z"/>
+                <path fill="#fff" d="M213.3 0h213.4v480H213.3z"/>
+              </svg>
+              Titbeat SchoolPro Support Team
+            </span>
           </div>
           <h2>Talk to Our School Onboarding Specialists</h2>
           <p>
