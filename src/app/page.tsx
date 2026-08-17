@@ -324,7 +324,7 @@ export default function HomePage() {
           <div className={styles.footerCol}><h4>Legal</h4><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/ndpr-compliance">NDPR Compliance</a></div>
         </div>
         <div className={styles.footerBottom}>
-          <p>© 2026 TitbeatTechsolutions.app — All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Titbeat Techsolutions. All rights reserved.</p>
           <div className={styles.footerBadges}><span>99.9% Uptime SLA</span><span>256-bit SSL Encrypted</span></div>
         </div>
       </footer>
