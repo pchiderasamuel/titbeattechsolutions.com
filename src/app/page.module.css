@@ -1,33 +1,41 @@
-.hero{min-height:100vh;display:flex;align-items:center;padding:6rem 2rem 4rem;background:radial-gradient(ellipse at 60% 40%,rgba(68,114,196,0.15) 0%,transparent 60%)}
+.hero{min-height:100vh;display:flex;align-items:center;padding:6rem 2rem 4rem;background:radial-gradient(ellipse at 70% 30%,rgba(37,99,235,0.12) 0%,rgba(15,23,42,0.02) 70%)}
 .heroInner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
 .heroContent{display:flex;flex-direction:column;gap:1.5rem}
-.badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(68,114,196,0.1);border:1px solid rgba(68,114,196,0.2);padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;color:var(--primary);width:fit-content}
-.badge span{width:8px;height:8px;background:#4ADE80;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-.heroH1{font-size:clamp(2rem,4vw,3.2rem);font-weight:900;line-height:1.15;color:var(--white)}
-.highlight{background:linear-gradient(135deg,#4472C4,#ED7D31);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.heroContent>p{color:var(--muted);font-size:1.05rem;line-height:1.7}
+.badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);padding:0.4rem 1.1rem;border-radius:20px;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;color:#2563EB;width:fit-content;text-transform:uppercase}
+.heroH1{font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900;line-height:1.15;color:var(--white);letter-spacing:-0.5px}
+.highlight{background:linear-gradient(135deg,#2563EB,#3B82F6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.heroSubhead{color:var(--muted);font-size:1.1rem;line-height:1.7;max-width:520px}
+
+/* Feature Pillars List */
+.featurePillars{display:flex;flex-direction:column;gap:0.85rem;margin:0.5rem 0 1rem}
+.pillarItem{display:flex;align-items:center;gap:0.85rem;font-size:0.95rem;font-weight:600;color:var(--white)}
+.pillarIcon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.orangeIcon{background:rgba(249,115,22,0.12);color:#F97316;border:1px solid rgba(249,115,22,0.2)}
+.blueIcon{background:rgba(59,130,246,0.12);color:#3B82F6;border:1px solid rgba(59,130,246,0.2)}
+.yellowIcon{background:rgba(234,179,8,0.12);color:#EAB308;border:1px solid rgba(234,179,8,0.2)}
+
 .heroBtns{display:flex;gap:1rem;flex-wrap:wrap}
-.heroStats{display:flex;gap:2rem;flex-wrap:wrap;padding-top:0.5rem}
-.stat{text-align:center}
-.val{font-size:1.5rem;font-weight:900;color:var(--white)}
-.lbl{font-size:0.75rem;color:var(--muted);margin-top:0.15rem}
-.heroVisual{display:flex;flex-direction:column;gap:1rem;position:relative}
-.floatBadgeTop,.floatBadgeBottom{display:flex;align-items:center;gap:0.5rem;background:var(--card);border:1px solid var(--border);padding:0.5rem 1rem;border-radius:20px;font-size:0.8rem;color:var(--muted);width:fit-content}
-.dotGreen{width:8px;height:8px;background:#4ADE80;border-radius:50%}
-.dotBlue{width:8px;height:8px;background:#60A5FA;border-radius:50%}
-.mockupCard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow)}
-.mockupHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
-.mockupHeader h4{font-size:0.95rem;font-weight:700}
-.dots{display:flex;gap:4px}
-.dots span{width:8px;height:8px;border-radius:50%;background:var(--border)}
-.mockupStats{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem}
-.mStat{background:var(--bg2);border-radius:10px;padding:0.75rem;border:1px solid var(--border)}
-.mVal{font-size:1.2rem;font-weight:800}
-.mLbl{font-size:0.7rem;color:var(--muted);margin-top:0.2rem}
-.blue .mVal{color:#60A5FA}
-.orange .mVal{color:#FB923C}
-.green .mVal{color:#4ADE80}
+
+/* Visual Right Column Showcase */
+.heroVisualWrapper{position:relative;display:flex;justify-content:center;align-items:center;padding:1.5rem 0}
+.floatBadgeTopRight{position:absolute;top:-10px;left:-20px;z-index:3;display:flex;align-items:center;gap:0.6rem;background:#FFFFFF;border:1px solid #E2E8F0;padding:0.5rem 1.25rem;border-radius:30px;font-size:0.85rem;font-weight:700;color:#0F172A;box-shadow:0 10px 25px rgba(0,0,0,0.08)}
+.floatBadgeBottomRight{position:absolute;bottom:-10px;right:-10px;z-index:3;display:flex;align-items:center;gap:0.6rem;background:#FFFFFF;border:1px solid #E2E8F0;padding:0.5rem 1.25rem;border-radius:30px;font-size:0.85rem;font-weight:700;color:#0F172A;box-shadow:0 10px 25px rgba(0,0,0,0.08)}
+.badgeIcon{font-size:1rem}
+
+/* Main Login Card Showcase */
+.loginCardShowcase{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:24px;padding:2.5rem 2.2rem 2rem;width:100%;max-width:440px;box-shadow:0 20px 50px rgba(37,99,235,0.09);position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center}
+.loginHatIcon{width:56px;height:56px;background:#2563EB;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#FFFFFF;margin-bottom:1.25rem;box-shadow:0 8px 20px rgba(37,99,235,0.3)}
+.loginTitle{font-size:1.75rem;font-weight:900;color:#0F172A;margin-bottom:0.4rem;letter-spacing:-0.3px}
+.loginSubtitle{font-size:0.88rem;color:#64748B;margin-bottom:1.75rem;line-height:1.5}
+.loginFormPreview{width:100%;display:flex;flex-direction:column;gap:1.2rem;text-align:left}
+.inputGroup{display:flex;flex-direction:column;gap:0.4rem}
+.inputGroup label{font-size:0.82rem;font-weight:700;color:#334155}
+.inputGroup input{width:100%;padding:0.8rem 1rem;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;font-size:0.95rem;color:#0F172A;outline:none;transition:border-color 0.2s}
+.inputGroup input:focus{border-color:#2563EB;background:#FFFFFF}
+.fieldHint{font-size:0.75rem;color:#94A3B8}
+.loginSubmitBtn{width:100%;padding:0.9rem;background:#2563EB;color:#FFFFFF;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s;margin-top:0.5rem;box-shadow:0 6px 20px rgba(37,99,235,0.25)}
+.loginSubmitBtn:hover{background:#1D4ED8}
+.poweredBy{margin-top:1.75rem;font-size:0.78rem;color:#64748B;display:flex;align-items:center;justify-content:center;gap:0.4rem}
 
 .marqueeSection{padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--bg2)}
 .marqueeLabel{text-align:center;font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:2px}
@@ -35,10 +43,105 @@
 .marqueeTrack span{flex-shrink:0}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.promoBannerSection{padding:2rem 2rem 0;max-width:1200px;margin:0 auto;width:100%}
-.promoBannerContainer{width:100%;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);line-height:0;border:1px solid var(--border)}
+.promoBannerSection{padding:4rem 2rem 0;max-width:1200px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:2.5rem}
+
+.overviewHeaderCard{text-align:center;max-width:850px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+.overviewBadge{display:inline-flex;align-items:center;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.25);padding:0.4rem 1.1rem;border-radius:20px;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;color:#2563EB;text-transform:uppercase}
+.overviewTitle{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;color:var(--white);line-height:1.25;letter-spacing:-0.4px}
+.overviewText{font-size:1.1rem;color:var(--muted);line-height:1.75;max-width:760px}
+.productTagline{font-size:0.9rem;color:#2563EB;font-weight:600;display:flex;align-items:center;gap:0.5rem;background:rgba(37,99,235,0.05);padding:0.5rem 1.25rem;border-radius:30px;border:1px solid rgba(37,99,235,0.15)}
+
+.promoBannerContainer{width:100%;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.12);line-height:0;border:1px solid var(--border)}
 .promoBannerImage{width:100%;height:auto;display:block;object-fit:cover;transition:transform 0.3s}
-.promoBannerImage:hover{transform:scale(1.02)}
+.promoBannerImage:hover{transform:scale(1.015)}
+
+/* STRATEGIC DEVICE SHOWCASE STYLES (LAPTOP + PHONE) */
+.deviceShowcaseWrapper{position:relative;width:100%;margin:2rem 0 1rem;display:flex;justify-content:center;align-items:center;min-height:520px;padding:1rem 0}
+
+/* Laptop Frame — True 16:10 Widescreen MacBook Pro Proportions */
+.laptopFrame{width:96%;max-width:1080px;background:#090D16;border-radius:20px;padding:12px 12px 0;box-shadow:0 35px 90px rgba(0,0,0,0.5),0 0 50px rgba(37,99,235,0.15);border:1px solid rgba(255,255,255,0.12);position:relative;z-index:1}
+.laptopTopBar{height:20px;display:flex;justify-content:center;align-items:center;gap:6px}
+.laptopCamera{width:7px;height:7px;background:#1E293B;border-radius:50%;border:1px solid #334155;position:relative}
+.laptopCamera::after{content:'';position:absolute;top:2px;right:-8px;width:3px;height:3px;background:#10B981;border-radius:50%}
+.laptopScreen{background:#F8FAFC;border-radius:10px;overflow:hidden;border:1px solid #CBD5E1;color:#0F172A;min-height:480px;display:flex;flex-direction:column}
+.laptopBase{height:24px;background:linear-gradient(180deg,#334155 0%,#1E293B 35%,#0F172A 100%);border-radius:0 0 20px 20px;position:relative;display:flex;justify-content:center;box-shadow:0 10px 25px rgba(0,0,0,0.4)}
+.laptopNotchHandle{width:130px;height:8px;background:#1E293B;border-radius:0 0 8px 8px;border:1px solid rgba(255,255,255,0.08);border-top:none}
+
+/* Browser UI Header */
+.browserHeader{background:#E2E8F0;padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #CBD5E1;gap:1rem}
+.windowDots{display:flex;gap:6px}
+.dotRed{width:10px;height:10px;background:#EF4444;border-radius:50%}
+.dotYellow{width:10px;height:10px;background:#F59E0B;border-radius:50%}
+.dotGreen{width:10px;height:10px;background:#10B981;border-radius:50%}
+.addressBar{background:#FFFFFF;border:1px solid #CBD5E1;padding:0.25rem 0.8rem;border-radius:6px;font-size:0.75rem;color:#475569;flex:1;max-width:480px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.statusPill{display:flex;align-items:center;gap:0.4rem;font-size:0.72rem;font-weight:700;color:#059669;background:#D1FAE5;padding:0.25rem 0.6rem;border-radius:12px}
+.pulseDot{width:6px;height:6px;background:#10B981;border-radius:50%;animation:pulse 1.5s infinite}
+
+/* Dashboard UI Content Inside Laptop */
+.dashboardUiPreview{padding:1.25rem;display:flex;flex-direction:column;gap:1rem;background:#F8FAFC}
+.dashHeaderRow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.schoolNameTitle{font-size:1.1rem;font-weight:800;color:#0F172A}
+.termSubtitle{font-size:0.75rem;color:#64748B}
+.dashQuickBtns{display:flex;gap:0.5rem}
+.btnMiniPrimary{background:#2563EB;color:#FFFFFF;padding:0.35rem 0.75rem;border-radius:6px;font-size:0.75rem;font-weight:700}
+.btnMiniOutline{border:1px solid #CBD5E1;background:#FFFFFF;color:#334155;padding:0.35rem 0.75rem;border-radius:6px;font-size:0.75rem;font-weight:600}
+
+.metricsGridPreview{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem}
+.metricCardMini{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:0.75rem;box-shadow:0 2px 5px rgba(0,0,0,0.02)}
+.mIcon{font-size:1.4rem}
+.mValText{font-size:1rem;font-weight:800;color:#0F172A}
+.mLblText{font-size:0.68rem;color:#64748B}
+
+.tablePreviewBox{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden}
+.tableHeadPreview{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;background:#F1F5F9;padding:0.5rem 0.8rem;font-size:0.72rem;font-weight:700;color:#475569;border-bottom:1px solid #E2E8F0}
+.tableRowPreview{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;padding:0.55rem 0.8rem;font-size:0.75rem;align-items:center;border-bottom:1px solid #F1F5F9}
+.stName{font-weight:700;color:#0F172A}
+.stClass{color:#64748B}
+.badgePaid{background:#DCFCE7;color:#15803D;padding:0.15rem 0.5rem;border-radius:10px;font-weight:700;font-size:0.68rem;width:fit-content}
+.badgePending{background:#FEF3C7;color:#D97706;padding:0.15rem 0.5rem;border-radius:10px;font-weight:700;font-size:0.68rem;width:fit-content}
+.stGrade{font-weight:700;color:#0F172A}
+.stAction{color:#2563EB;font-weight:600;cursor:pointer}
+
+/* Smartphone Container & Badge Below */
+.phoneContainerWrapper{position:absolute;right:2%;bottom:-10px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:0.75rem}
+.phoneFrame{position:relative;width:230px;height:450px;background:#0F172A;border-radius:36px;padding:10px;box-shadow:0 25px 60px rgba(0,0,0,0.45),0 0 30px rgba(37,99,235,0.25);border:2px solid #334155}
+.phoneDynamicIsland{width:70px;height:14px;background:#000000;border-radius:10px;margin:0 auto 6px;position:relative;z-index:5}
+.phoneScreen{background:#FFFFFF;border-radius:28px;height:calc(100% - 20px);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;color:#0F172A;position:relative}
+.phoneStatusBar{display:flex;justify-content:space-between;padding:0.4rem 1rem 0;font-size:0.68rem;font-weight:700;color:#475569}
+.phoneAppContent{padding:0.8rem;display:flex;flex-direction:column;gap:0.75rem}
+.phoneHeader{display:flex;justify-content:space-between;align-items:center}
+.phoneAppTitle{font-size:0.82rem;font-weight:800;color:#2563EB}
+.phoneTeacherName{font-size:0.65rem;color:#64748B}
+.phoneAvatar{font-size:1.2rem}
+
+.phoneActionPills{display:flex;gap:0.4rem}
+.pAction{flex:1;background:#F1F5F9;border:1px solid #E2E8F0;border-radius:8px;padding:0.4rem;font-size:0.68rem;font-weight:700;text-align:center;color:#334155}
+
+.phoneCardMain{background:linear-gradient(135deg,#2563EB,#1D4ED8);color:#FFFFFF;border-radius:12px;padding:0.75rem}
+.phoneCardTitle{font-size:0.68rem;opacity:0.9}
+.phoneStatBig{font-size:0.95rem;font-weight:900;margin:0.2rem 0 0.4rem}
+.progressBar{height:4px;background:rgba(255,255,255,0.3);border-radius:4px;overflow:hidden}
+.progressFill{height:100%;background:#4ADE80;border-radius:4px}
+
+.phoneNotificationBox{background:#FEF3C7;border:1px solid #FDE68A;border-radius:10px;padding:0.6rem;font-size:0.65rem;color:#92400E}
+.phoneNotificationBox span{font-weight:800;display:block;margin-bottom:0.15rem}
+
+.phoneNavHome{height:16px;display:flex;justify-content:center;align-items:center;background:#FFFFFF}
+.navHomeIndicator{width:90px;height:4px;background:#CBD5E1;border-radius:4px}
+
+/* Floating Contextual Badges */
+.deviceBadgeDesktop{position:absolute;top:-15px;left:5%;z-index:4;background:#FFFFFF;border:1px solid #E2E8F0;padding:0.4rem 1rem;border-radius:20px;font-size:0.78rem;color:#0F172A;box-shadow:0 8px 20px rgba(0,0,0,0.08)}
+.deviceBadgeMobileBelow{background:#FFFFFF;border:1px solid #E2E8F0;padding:0.45rem 1.1rem;border-radius:20px;font-size:0.78rem;color:#0F172A;box-shadow:0 10px 25px rgba(0,0,0,0.12);white-space:nowrap;z-index:5}
+
+/* Responsive Media Queries for Device Showcase */
+@media (max-width: 900px){
+  .phoneContainerWrapper{position:relative;right:auto;bottom:auto;margin-top:-60px}
+  .phoneFrame{width:200px;height:400px}
+  .deviceShowcaseWrapper{flex-direction:column;min-height:auto}
+  .laptopFrame{width:100%}
+  .deviceBadgeDesktop{display:none}
+}
+
 .section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
 .sectionHead{text-align:center;margin-bottom:3rem}
 .sectionLabel{font-size:0.8rem;text-transform:uppercase;letter-spacing:3px;color:#4472C4;font-weight:700;margin-bottom:0.5rem}

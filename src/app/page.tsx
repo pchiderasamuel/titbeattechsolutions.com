@@ -18,30 +18,72 @@ export default function HomePage() {
       <section className={styles.hero} id="home">
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
-            <div className={styles.badge}><span/>Cloud SaaS for Nigerian Schools</div>
-            <h1 className={styles.heroH1}>Run Your School Smarter.<br/><span className={styles.highlight}>Everything in One Place.</span></h1>
-            <p><strong>Titbeat SchoolPro</strong> helps K-12 school admins and teachers manage students records,attendance, roll-call, result generation, track fees, send notifications and run timetables — all from one dashboard, on any device. <br/><span style={{ fontSize: '0.85em', opacity: 0.7 }}>A product by Titbeat Techsolutions</span></p>
+            <div className={styles.badge}>CLOUD MANAGEMENT</div>
+            <h1 className={styles.heroH1}>The modern way to run your <span className={styles.highlight}>school.</span></h1>
+            <p className={styles.heroSubhead}>
+              Trusted by educational institutions to manage grades, attendance, and staff seamlessly. All your data, synced and secured.
+            </p>
+
+            <div className={styles.featurePillars}>
+              <div className={styles.pillarItem}>
+                <div className={`${styles.pillarIcon} ${styles.orangeIcon}`}>⚡</div>
+                <span>Offline-first technology</span>
+              </div>
+              <div className={styles.pillarItem}>
+                <div className={`${styles.pillarIcon} ${styles.blueIcon}`}>📊</div>
+                <span>Real-time synchronization</span>
+              </div>
+              <div className={styles.pillarItem}>
+                <div className={`${styles.pillarIcon} ${styles.yellowIcon}`}>🔒</div>
+                <span>Bank-grade PIN security</span>
+              </div>
+            </div>
+
             <div className={styles.heroBtns}>
               <button className={styles.btnPrimary} onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>Start Free Trial</button>
               <a href="#how-it-works" className={styles.btnOutline}>See How It Works</a>
             </div>
-            <div className={styles.heroStats}>
-              {[['7','Day Free Trial'],['99.9%','Uptime SLA'],['K-12','Schools'],['NGN','Local Billing']].map(([v,l]) => (
-                <div key={l} className={styles.stat}><div className={styles.val}>{v}</div><div className={styles.lbl}>{l}</div></div>
-              ))}
-            </div>
           </div>
-          <div className={styles.heroVisual}>
-            <div className={styles.floatBadgeTop}><span className={styles.dotGreen}/>System Online — 99.9% uptime</div>
-            <div className={styles.mockupCard}>
-              <div className={styles.mockupHeader}><h4>📊 Admin Dashboard</h4><div className={styles.dots}><span/><span/><span/></div></div>
-              <div className={styles.mockupStats}>
-                <div className={`${styles.mStat} ${styles.blue}`}><div className={styles.mVal}>1,247</div><div className={styles.mLbl}>Students</div></div>
-                <div className={`${styles.mStat} ${styles.orange}`}><div className={styles.mVal}>₦4.2M</div><div className={styles.mLbl}>Fees Collected</div></div>
-                <div className={`${styles.mStat} ${styles.green}`}><div className={styles.mVal}>94%</div><div className={styles.mLbl}>Attendance</div></div>
+
+          <div className={styles.heroVisualWrapper}>
+            {/* Top Floating Badge */}
+            <div className={styles.floatBadgeTopRight}>
+              <span className={styles.badgeIcon}>📊</span> Grade Analytics
+            </div>
+
+            {/* Main Interactive Login Card Showcase */}
+            <div className={styles.loginCardShowcase}>
+              <div className={styles.loginHatIcon}>
+                🎓
+              </div>
+              <h2 className={styles.loginTitle}>School Login</h2>
+              <p className={styles.loginSubtitle}>Enter your school&apos;s unique access PIN to continue.</p>
+
+              <form onSubmit={(e) => { e.preventDefault(); document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }); }} className={styles.loginFormPreview}>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="hero-school-code">School Code</label>
+                  <input id="hero-school-code" name="schoolCode" type="text" placeholder="e.g. SC-123" readOnly defaultValue="SC-123" />
+                  <span className={styles.fieldHint}>The 6-character code given by your provider.</span>
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label htmlFor="hero-school-pin">School PIN</label>
+                  <input id="hero-school-pin" name="schoolPin" type="password" placeholder="e.g. SCH-7K2P" readOnly defaultValue="SCH-7K2P" />
+                  <span className={styles.fieldHint}>Issued by your provider on subscription.</span>
+                </div>
+
+                <button type="submit" className={styles.loginSubmitBtn}>Continue</button>
+              </form>
+
+              <div className={styles.poweredBy}>
+                Powered by <strong>Titbeattechsolutions LTD</strong>
               </div>
             </div>
-            <div className={styles.floatBadgeBottom}><span className={styles.dotBlue}/>Fee payment received — Adaeze O.</div>
+
+            {/* Bottom Floating Badge */}
+            <div className={styles.floatBadgeBottomRight}>
+              <span className={styles.badgeIcon}>🔒</span> End-to-End Secure
+            </div>
           </div>
         </div>
       </section>
@@ -56,9 +98,173 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* PROMO BANNER */}
+      {/* PROMO BANNER & PLATFORM OVERVIEW */}
       <section className={styles.promoBannerSection}>
-        <div className={styles.promoBannerContainer}>
+        <div className={styles.overviewHeaderCard}>
+          <div className={styles.overviewBadge}>PRODUCT OVERVIEW</div>
+          <h2 className={styles.overviewTitle}>
+            Run Your School Smarter. <br />
+            <span className={styles.highlight}>Everything in One Place.</span>
+          </h2>
+          <p className={styles.overviewText}>
+            <strong>Titbeat SchoolPro</strong> helps K-12 school admins and teachers manage student records, attendance, roll-call, result generation, track fees, send notifications, and run timetables — all from one dashboard, on any device.
+          </p>
+          <div className={styles.productTagline}>
+            ⚡ <span>A product by <strong>Titbeat Techsolutions</strong></span>
+          </div>
+        </div>
+
+        {/* STRATEGIC DEVICE MOCKUP SHOWCASE (LAPTOP + SMARTPHONE) */}
+        <div className={styles.deviceShowcaseWrapper}>
+          {/* Laptop Mockup */}
+          <div className={styles.laptopFrame}>
+            <div className={styles.laptopTopBar}>
+              <div className={styles.laptopCamera} />
+            </div>
+            <div className={styles.laptopScreen}>
+              <div className={styles.browserHeader}>
+                <div className={styles.windowDots}>
+                  <span className={styles.dotRed} />
+                  <span className={styles.dotYellow} />
+                  <span className={styles.dotGreen} />
+                </div>
+                <div className={styles.addressBar}>
+                  🔒 https://app.titbeattechsolutions.com/admin/dashboard
+                </div>
+                <div className={styles.statusPill}>
+                  <span className={styles.pulseDot} /> Live Sync
+                </div>
+              </div>
+              <div className={styles.dashboardUiPreview}>
+                <div className={styles.dashHeaderRow}>
+                  <div>
+                    <h3 className={styles.schoolNameTitle}>Greenfield International Academy</h3>
+                    <p className={styles.termSubtitle}>2026/2027 Academic Session — 3rd Term</p>
+                  </div>
+                  <div className={styles.dashQuickBtns}>
+                    <span className={styles.btnMiniPrimary}>+ Add Student</span>
+                    <span className={styles.btnMiniOutline}>⚡ Bulk Promote</span>
+                  </div>
+                </div>
+
+                <div className={styles.metricsGridPreview}>
+                  <div className={styles.metricCardMini}>
+                    <span className={styles.mIcon}>👨‍🎓</span>
+                    <div>
+                      <div className={styles.mValText}>1,247</div>
+                      <div className={styles.mLblText}>Active Students</div>
+                    </div>
+                  </div>
+                  <div className={styles.metricCardMini}>
+                    <span className={styles.mIcon}>💳</span>
+                    <div>
+                      <div className={styles.mValText}>₦4,250,000</div>
+                      <div className={styles.mLblText}>Fees Collected</div>
+                    </div>
+                  </div>
+                  <div className={styles.metricCardMini}>
+                    <span className={styles.mIcon}>📊</span>
+                    <div>
+                      <div className={styles.mValText}>94.8%</div>
+                      <div className={styles.mLblText}>Attendance Rate</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={styles.tablePreviewBox}>
+                  <div className={styles.tableHeadPreview}>
+                    <span>Student Name</span>
+                    <span>Class</span>
+                    <span>Fee Status</span>
+                    <span>Result Grade</span>
+                    <span>Action</span>
+                  </div>
+                  <div className={styles.tableRowPreview}>
+                    <span className={styles.stName}>Adaeze Okonkwo</span>
+                    <span className={styles.stClass}>JSS 2A</span>
+                    <span className={styles.badgePaid}>Paid</span>
+                    <span className={styles.stGrade}>88.4% (A)</span>
+                    <span className={styles.stAction}>View Result</span>
+                  </div>
+                  <div className={styles.tableRowPreview}>
+                    <span className={styles.stName}>Emeka Abubakar</span>
+                    <span className={styles.stClass}>SS 3 Science</span>
+                    <span className={styles.badgePaid}>Paid</span>
+                    <span className={styles.stGrade}>92.1% (A+)</span>
+                    <span className={styles.stAction}>View Result</span>
+                  </div>
+                  <div className={styles.tableRowPreview}>
+                    <span className={styles.stName}>Chinedu Danjuma</span>
+                    <span className={styles.stClass}>Primary 5B</span>
+                    <span className={styles.badgePending}>Partial</span>
+                    <span className={styles.stGrade}>79.5% (B)</span>
+                    <span className={styles.stAction}>Send Alert</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.laptopBase}>
+              <div className={styles.laptopNotchHandle} />
+            </div>
+          </div>
+
+          {/* Smartphone Mockup (Overlaid with 3D Depth) */}
+          <div className={styles.phoneContainerWrapper}>
+            <div className={styles.phoneFrame}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <div className={styles.phoneStatusBar}>
+                  <span>9:41</span>
+                  <span>📶 🔋</span>
+                </div>
+                <div className={styles.phoneAppContent}>
+                  <div className={styles.phoneHeader}>
+                    <div>
+                      <div className={styles.phoneAppTitle}>SchoolPro Mobile</div>
+                      <div className={styles.phoneTeacherName}>Teacher Portal — Mr. David</div>
+                    </div>
+                    <div className={styles.phoneAvatar}>👨‍🏫</div>
+                  </div>
+
+                  <div className={styles.phoneActionPills}>
+                    <div className={styles.pAction}>⚡ Roll-Call</div>
+                    <div className={styles.pAction}>📝 Grades</div>
+                  </div>
+
+                  <div className={styles.phoneCardMain}>
+                    <div className={styles.phoneCardTitle}>JSS 1B Attendance</div>
+                    <div className={styles.phoneStatBig}>38 / 40 Present</div>
+                    <div className={styles.progressBar}>
+                      <div className={styles.progressFill} style={{ width: '95%' }} />
+                    </div>
+                  </div>
+
+                  <div className={styles.phoneNotificationBox}>
+                    <span>🔔 SMS Alert Sent</span>
+                    <p>Term 3 Report Cards Ready for 120 Parents.</p>
+                  </div>
+                </div>
+
+                <div className={styles.phoneNavHome}>
+                  <span className={styles.navHomeIndicator} />
+                </div>
+              </div>
+            </div>
+
+            {/* Anchored Directly Below Mobile Smartphone Mockup */}
+            <div className={styles.deviceBadgeMobileBelow}>
+              📱 <strong>Mobile Staff App</strong> — Fast Attendance & Scores
+            </div>
+          </div>
+
+          {/* Floating Contextual Badge for Desktop */}
+          <div className={styles.deviceBadgeDesktop}>
+            💻 <strong>Desktop Admin Portal</strong> — Full Operational Control
+          </div>
+        </div>
+
+        {/* Existing Promo Banner Image Backup */}
+        <div className={styles.promoBannerContainer} style={{ marginTop: '1.5rem' }}>
           <img src="/promo-banner.png" alt="Cloud SaaS App for Modern School Administration" className={styles.promoBannerImage} />
         </div>
       </section>
