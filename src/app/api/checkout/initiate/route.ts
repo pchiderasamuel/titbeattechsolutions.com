@@ -17,10 +17,10 @@ const checkoutSchema = z.object({
 });
 
 const PLAN_BASE_PRICES: Record<string, number> = {
-  micro: 20000,
-  starter: 52000,
-  growth: 105000,
-  enterprise: 112500,
+  micro: 60000,
+  starter: 150000,
+  growth: 300000,
+  enterprise: 300000,
 };
 
 /**

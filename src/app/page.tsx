@@ -126,10 +126,10 @@ export default function HomePage() {
         </div>
         <div className={styles.pricingGrid}>
           {[
-            { id:'micro', name:'Micro', desc:'0–200 students', basePrice:20000, listPrice:30000, features:['Up to 200 students','Admin + 2 staff accounts','Fee management','Capped SMS/email credits','Basic timetable','Email support'], popular:false },
-            { id:'starter', name:'Starter', desc:'201–500 students', basePrice:52000, listPrice:75000, features:['Up to 500 students','Admin + 5 staff accounts','Fee management','Capped SMS/email credits','Full timetable','Email support'], popular:false },
-            { id:'growth',  name:'Growth',  desc:'501–1,000 students', basePrice:105000, listPrice:150000, features:['Up to 1,000 students','Unlimited staff accounts','Fee management','Higher credit pool','Full timetable','Analytics dashboard','Priority support'], popular:true },
-            { id:'enterprise', name:'Enterprise', desc:'1,001+ students', basePrice:112500, listPrice:150000, features:['Unlimited students','Unlimited staff accounts','Custom credit pool','Multi-branch support','API integrations','Dedicated account manager','Dedicated SLA support'], popular:false, isCustom: true, plus: true },
+            { id:'micro', name:'Micro', desc:'0–200 students (₦300/student)', basePrice:60000, listPrice:100000, features:['Up to 200 students','Admin + 2 staff accounts','Fee management','Capped SMS/email credits','Basic timetable','Email support'], popular:false },
+            { id:'starter', name:'Starter', desc:'201–500 students (₦300/student)', basePrice:150000, listPrice:250000, features:['Up to 500 students','Admin + 5 staff accounts','Fee management','Capped SMS/email credits','Full timetable','Email support'], popular:false },
+            { id:'growth',  name:'Growth',  desc:'501–1,000 students (₦300/student)', basePrice:300000, listPrice:500000, features:['Up to 1,000 students','Unlimited staff accounts','Fee management','Higher credit pool','Full timetable','Analytics dashboard','Priority support'], popular:true },
+            { id:'enterprise', name:'Enterprise', desc:'1,001+ students (₦300/student)', basePrice:300000, listPrice:500000, features:['Unlimited students','Unlimited staff accounts','Custom credit pool','Multi-branch support','API integrations','Dedicated account manager','Dedicated SLA support'], popular:false, isCustom: true, plus: true },
           ].map(plan => {
             const currentPrice = isAnnual ? plan.basePrice * 3 * 0.9 : plan.basePrice;
             const listPriceCurrent = isAnnual ? plan.listPrice * 3 * 0.9 : plan.listPrice;
@@ -151,7 +151,7 @@ export default function HomePage() {
               
               {plan.id === 'enterprise' ? (
                 <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '1rem', marginTop: '-0.3rem' }}>
-                  List: ₦{listStr}{plan.plus ? ' + ₦120/student beyond 1k' : ''} <br/>(Floor at list - 25%)
+                  List: ₦{listStr}{plan.plus ? ' + ₦300/student beyond 1k' : ''} <br/>(Floor at list - 25%)
                 </div>
               ) : (
                 <div style={{ fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '1rem', marginTop: '-0.3rem' }}>
@@ -159,7 +159,7 @@ export default function HomePage() {
                 </div>
               )}
               <div style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600, marginBottom: '1rem', lineHeight: 1.4 }}>
-                Founding price locked for your first academic year (3 terms). Offer limited to the first 150 schools.
+                Special ₦300/student promo locked for your first academic year (3 terms). Offer limited to the first 150 schools.
               </div>
               <hr className={styles.priceDivider}/>
               <ul className={styles.priceFeatures}>
