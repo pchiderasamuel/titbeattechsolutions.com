@@ -16,6 +16,13 @@ export const metadata: Metadata = {
   keywords: ['school management Nigeria', 'K-12 software', 'school management system', 'TitbeatTech', 'edtech Nigeria', 'school portal', 'Titbeat SchoolPro'],
   authors: [{ name: 'TitbeatTech Solutions' }],
   creator: 'TitbeatTech Solutions',
+  icons: {
+    icon: [
+      { url: '/tbt-icon.png', type: 'image/png' },
+    ],
+    apple: '/tbt-icon.png',
+    shortcut: '/tbt-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_NG',
@@ -24,6 +31,7 @@ export const metadata: Metadata = {
     description:
       'Cloud-based school management SaaS for Nigerian K-12 schools. Manage fees, students, and staff effortlessly.',
     siteName: 'Titbeat SchoolPro',
+    images: ['/tbt-logo.png'],
   },
   twitter: {
     card: 'summary_large_image',
@@ -31,6 +39,7 @@ export const metadata: Metadata = {
     description:
       'Cloud-based school management SaaS for Nigerian K-12 schools. Manage fees, students, and staff effortlessly.',
     creator: '@titbeattech',
+    images: ['/tbt-logo.png'],
   },
 };
 
