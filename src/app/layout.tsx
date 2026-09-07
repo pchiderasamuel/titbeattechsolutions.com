@@ -16,13 +16,6 @@ export const metadata: Metadata = {
   keywords: ['school management Nigeria', 'K-12 software', 'school management system', 'TitbeatTech', 'edtech Nigeria', 'school portal', 'Titbeat SchoolPro'],
   authors: [{ name: 'TitbeatTech Solutions' }],
   creator: 'TitbeatTech Solutions',
-  icons: {
-    icon: [
-      { url: '/tbt-icon.png', type: 'image/png' },
-    ],
-    apple: '/tbt-icon.png',
-    shortcut: '/tbt-icon.png',
-  },
   openGraph: {
     type: 'website',
     locale: 'en_NG',
