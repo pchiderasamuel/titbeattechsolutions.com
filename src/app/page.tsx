@@ -332,8 +332,8 @@ export default function HomePage() {
         </div>
         <div className={styles.pricingGrid}>
           {[
-            { id:'micro', name:'Micro', desc:'0–200 students (₦300/student)', basePrice:60000, listPrice:100000, features:['Up to 200 students','Admin + 2 staff accounts','Fee management','Capped SMS/email credits','Basic timetable','Email support'], popular:false },
-            { id:'starter', name:'Starter', desc:'201–500 students (₦300/student)', basePrice:150000, listPrice:250000, features:['Up to 500 students','Admin + 5 staff accounts','Fee management','Capped SMS/email credits','Full timetable','Email support'], popular:false },
+            { id:'micro', name:'Micro', desc:'0–200 students (₦300/student)', basePrice:60000, listPrice:100000, features:['Up to 200 students','Unlimited staff accounts','Fee management','Capped SMS/email credits','Basic timetable','Email support'], popular:false },
+            { id:'starter', name:'Starter', desc:'201–500 students (₦300/student)', basePrice:150000, listPrice:250000, features:['Up to 500 students','Unlimited staff accounts','Fee management','Capped SMS/email credits','Full timetable','Email support'], popular:false },
             { id:'growth',  name:'Growth',  desc:'501–1,000 students (₦300/student)', basePrice:300000, listPrice:500000, features:['Up to 1,000 students','Unlimited staff accounts','Fee management','Higher credit pool','Full timetable','Analytics dashboard','Priority support'], popular:true },
             { id:'enterprise', name:'Enterprise', desc:'1,001+ students (₦300/student)', basePrice:300000, listPrice:500000, features:['Unlimited students','Unlimited staff accounts','Custom credit pool','Multi-branch support','API integrations','Dedicated account manager','Dedicated SLA support'], popular:false, isCustom: true, plus: true },
           ].map(plan => {
@@ -404,7 +404,7 @@ export default function HomePage() {
             </thead>
             <tbody>
               <tr><td>Student management</td><td>Up to 200</td><td>Up to 500</td><td>Up to 1,000</td><td>Unlimited</td></tr>
-              <tr><td>Staff accounts</td><td>Admin + 2</td><td>Admin + 5</td><td>Unlimited</td><td>Unlimited</td></tr>
+              <tr><td>Staff accounts</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
               <tr><td>Fee management</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
               <tr><td>SMS/email notifications</td><td>Capped credits</td><td>Capped credits</td><td>Higher credit pool</td><td>Custom pool</td></tr>
               <tr><td>Timetable planner</td><td>Basic</td><td>Full</td><td>Full</td><td>Full</td></tr>
